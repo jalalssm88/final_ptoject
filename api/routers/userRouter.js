@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/userModel');
 
 router.post('/signup', (req,res,next)=> {
+
     console.log('=====', req.body)
     User.find({email:req.body.email})
     .exec()
@@ -22,11 +23,10 @@ router.post('/signup', (req,res,next)=> {
                         error:err
                     })
                 }else{
-                    const new_user = new Admin({
+                    const new_user = new User({
                         name:req.body.name,
                         email:req.body.email,
                         password:hash,
-                        role:req.body.role
                     })
                     new_user.save()
                     .then(result=> {
@@ -47,16 +47,17 @@ router.post('/signup', (req,res,next)=> {
 })
 
 router.post('/login', (req, res, next)=>{
+    console.log('user', req.body)
     User.find({email:req.body.email})
     .exec()
     .then(user=>{
-        console.log('user', user)
+        console.log('herere')
         if(user.length < 1){
             return res.status(401).json({
                 message:"eamil to try to login not found"
             })
         }
-        bycrypt.compare(req.body.password, user[0].password, (err, result)=>{
+        bcrypt.compare(req.body.password, user[0].password, (err, result)=>{
             if(err){
                 return res.status(401).json({
                     message:"Auth failed"
@@ -66,7 +67,7 @@ router.post('/login', (req, res, next)=>{
                 const token = jwt.sign({
                     email: user[0].email,
                     userId: user[0]._id,
-                    role: user[0].role
+                    userName:user[0].name
                 },
                     'secret'
                 );
@@ -81,8 +82,17 @@ router.post('/login', (req, res, next)=>{
         })
     })
     .catch(err =>{
+        console.log('error here')
         res.status(500).json({
             error:err
+        })
+    })
+})
+
+router.get('/users', (req, res)=>{
+    User.find().then(user=>{
+        res.json({
+            user:user
         })
     })
 })

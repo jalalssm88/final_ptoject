@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {createUser} from '../actions/action'
+import {loginUser} from '../actions/action'
 
-class Signup extends Component {
+class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name:'',
             email:'',
             password:''
         }
@@ -18,7 +17,15 @@ class Signup extends Component {
     }
     submitHandler = (e) =>{
         e.preventDefault();
-        this.props.createUser(this.state, this.props.history)
+        this.props.loginUser(this.state,  this.props.history)
+        this.setState({
+            email:'',
+            password:''
+        })
+        this.setState({
+            email:'',
+            password:''
+        })
     }
     render() {
         return (
@@ -27,10 +34,6 @@ class Signup extends Component {
                 <div className="eight wide column">
                     <div className="ui segment" style={{"marginTop":"40px"}}>
                         <form onSubmit={this.submitHandler} className="ui form">
-                            <div className="field">
-                                <label>Name</label>
-                                <input type="text" name="name" value={this.state.name} onChange={this.changeHandler} />
-                            </div>
                             <div className="field">
                                 <label>Email</label>
                                 <input type="text" name="email" value={this.state.email} onChange={this.changeHandler} />
@@ -41,7 +44,7 @@ class Signup extends Component {
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>
-                                <button className="ui blue fluid button">Sign up</button>
+                                <button className="ui blue fluid button">Login up</button>
                             </div>
                         </form>
                     </div>
@@ -52,8 +55,12 @@ class Signup extends Component {
     }
 }
 
-const mapStateToProps = (state) =>({
-    user:state.user
-})
+const mapStateToProps = (state) =>(
+    console.log('props state', state)
+//     {
+//     user:state.user
+// }
 
-export default connect(mapStateToProps,{createUser})(Signup);
+)
+
+export default connect(mapStateToProps,{loginUser})(Login);

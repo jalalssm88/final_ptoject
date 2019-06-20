@@ -1,19 +1,26 @@
-import {GET_USER} from './types';
+import {CREATE_USER, LOGIN_USER} from './types';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+
 
 //create accounts
 export const createUser = (userData, history)=> dispatch =>{
-    axios.post('/admin/signup',userData).then(res => dispatch({
+    axios.post('/user/signup',userData).then(res => dispatch({
         type:CREATE_USER,
         payload:res.data
     }))
-    // .then(res => history.push('/campuses/list'));
+    .then(res => history.push('/login'));
 }
 
 export const loginUser = (userData, history)=> dispatch =>{
-    axios.post('/admin/login',userData).then(res => dispatch({
-        type:GET_USER,
-        payload:res.data
-    }))
-    // .then(res => history.push('/campuses/list'));
+    axios.post('/user/login',userData).then(res => {
+        const { token } = res.data;
+        localStorage.setItem('jwtToken', token);
+        const decoded = jwt_decode(token);
+
+        dispatch({
+            type:LOGIN_USER,
+            payload:decoded
+        })
+    }).then(res => history.push('/dashboard'))
 }

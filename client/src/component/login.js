@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import {loginUser} from '../actions/action'
 
 class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
             email:'',
-            Password:''
+            password:''
         }
     }
     changeHandler = (e) =>{
@@ -15,6 +17,15 @@ class Login extends Component {
     }
     submitHandler = (e) =>{
         e.preventDefault();
+        this.props.loginUser(this.state,  this.props.history)
+        this.setState({
+            email:'',
+            password:''
+        })
+        this.setState({
+            email:'',
+            password:''
+        })
     }
     render() {
         return (
@@ -29,7 +40,7 @@ class Login extends Component {
                             </div>
                             <div className="field">
                                 <label>Password</label>
-                                <input type="text" name="email" value={this.state.email} onChange={this.changeHandler} />
+                                <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} />
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>
@@ -44,4 +55,12 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) =>(
+    // console.log('props state', state)    
+    {
+    user:state.user
+}
+
+)
+
+export default connect(mapStateToProps,{loginUser})(Login);

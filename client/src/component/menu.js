@@ -4,8 +4,10 @@ import{ Link, withRouter } from 'react-router-dom';
 class Menu extends Component {
     logout (e){
         e.preventDefault();
-        localStorage.removeItem('usertoken')
+        localStorage.removeItem('jwtToken')
         this.props.history.push('/login')
+        window.location.reload();
+        
     }
     render() {
         const loginRegLink = (
@@ -38,17 +40,20 @@ class Menu extends Component {
                     <div className="item ">
                         <Link to="/create_board"><button className="ui icon button"><i className="plus icon"></i></button> </Link>
                     </div>
+
+                    <div className="item">
+                        <button className="ui mini blue button"></button>
+                    </div>
                     <div className="item right floated">
                         <button className="ui green button small" onClick={this.logout.bind(this)} to="/signup">log out</button>
                     </div>
                 </div>
             </div>
         )
-
         return(
             <div>
                 {
-                    localStorage.usertoken? userLink:loginRegLink
+                    localStorage.jwtToken? userLink:loginRegLink
                 }
             </div>
         )
