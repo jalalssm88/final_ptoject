@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux';
-import {loginUser} from '../actions/action'
+import { connect } from 'react-redux';
 
-class Login extends Component {
+class Dashboard extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -28,39 +27,28 @@ class Login extends Component {
         })
     }
     render() {
+        const { user } = this.props.auth;
+        console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrr', user)
         return (
             <div className="ui grid">
-                <div className="four wide column"></div>
-                <div className="eight wide column">
-                    <div className="ui segment" style={{"marginTop":"40px"}}>
-                        <form onSubmit={this.submitHandler} className="ui form">
-                            <div className="field">
-                                <label>Email</label>
-                                <input type="text" name="email" value={this.state.email} onChange={this.changeHandler} />
-                            </div>
-                            <div className="field">
-                                <label>Password</label>
-                                <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} />
-                            </div>
-                            <div className="field">
-                                <label>&nbsp;</label>
-                                <button className="ui blue fluid button">Login up</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div className="four wide column"></div>
+               <div className="sixteen wide column">
+                   <div className="ui segment">
+                       <h4>Biwits Pvt Ltd</h4>
+                       <h5>Job Title: <span>Python Developer</span></h5>
+                       <p>Require a python software developer for a Product baseed company in karachi</p>
+                       <button className="ui small green button">Apply now</button>
+                       {
+                           console.log('userrrr', this.props)
+                       }
+                   </div>
+               </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) =>(
-    console.log('props state', state)
-//     {
-//     user:state.user
-// }
+const mapStateToProps = state => ({
+    auth: state.auth
+});
 
-)
-
-export default connect(mapStateToProps,{loginUser})(Login);
+export default connect(mapStateToProps, {})(Dashboard)

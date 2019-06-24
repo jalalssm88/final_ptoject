@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {loginUser} from '../actions/action'
+import {loginUser} from '../actions/authAction'
 
 class Login extends Component {
     constructor(props){
@@ -10,6 +10,11 @@ class Login extends Component {
             password:''
         }
     }
+    // componentDidMount() {
+    //     if (this.props.auth.isAuthenticated) {
+    //       this.props.history.push('/dashboard');
+    //     }
+    // }
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
@@ -55,12 +60,8 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) =>(
-    // console.log('props state', state)    
-    {
-    user:state.user
-}
-
-)
+const mapStateToProps = (state) =>({
+    auth: state.auth
+})
 
 export default connect(mapStateToProps,{loginUser})(Login);
