@@ -27,6 +27,7 @@ router.post('/signup', (req,res,next)=> {
                         name:req.body.name,
                         email:req.body.email,
                         password:hash,
+                        role:req.body.role
                     })
                     new_user.save()
                     .then(result=> {
@@ -65,7 +66,7 @@ router.post('/login', (req, res, next)=>{
             }
             if(result){
                 const token = jwt.sign({
-                    email: user[0].email,
+                    role: user[0].role,
                     userId: user[0]._id,
                     userName:user[0].name
                 },

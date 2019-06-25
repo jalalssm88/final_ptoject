@@ -7,6 +7,7 @@ class Menu extends Component {
     onLogoutClick(e) {
         e.preventDefault();
         this.props.logoutUser();
+        this.props.history.push('/login')
     }
     render() {
         const { isAuthenticated, user } = this.props.auth;
@@ -20,7 +21,7 @@ class Menu extends Component {
                         <h4>Well come : <span>{user.userName}</span></h4>
                     </div>
                     <div className="item right floated">
-                        <a href="" className="ui green button small" onClick={this.onLogoutClick.bind(this)}>{' '}log out</a>
+                        <button  className="ui green button small" onClick={this.onLogoutClick.bind(this)} to="/login">{' '}log out</button>
                     </div>
                 </div>
             </div>

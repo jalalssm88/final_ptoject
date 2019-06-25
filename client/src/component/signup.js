@@ -10,7 +10,8 @@ class Signup extends Component {
         this.state = {
             name:'',
             email:'',
-            password:''
+            password:'',
+            role:''
         }
     }
     componentDidMount() {
@@ -45,6 +46,14 @@ class Signup extends Component {
                             <div className="field">
                                 <label>Password</label>
                                 <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} />
+                            </div>
+                            <div className="field">
+                                <label>Role</label>
+                                <select name="role" onChange={this.changeHandler}>
+                                    <option value="">------------</option>
+                                    <option value="company">Company</option>
+                                    <option value="student">Student</option>
+                                </select>
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>

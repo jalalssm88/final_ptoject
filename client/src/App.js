@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Signup from './component/signup'
 import Login from './component/login'
 import Apply from './component/apply'
+import CompanyDashboard from './component/companyBoard'
+import PostJob from './component/postJob'
 
 import Menu from './component/menu'
 
@@ -49,6 +51,8 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/apply" component={Apply} />
+              <Route path="/company_dashboard" component={CompanyDashboard} />
+              <Route path="/post_job/:id" component={PostJob} /> 
             </Switch>
           </div>
         </Router>

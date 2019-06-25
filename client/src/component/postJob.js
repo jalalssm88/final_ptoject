@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 
-class Apply extends Component {
+class PostJob extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name:'',
-            email:'',
-            contact:'',
-            qualification:'',
+            job_title:'',
+            description:'',
+            location:'',
             address:'',
-            Skills:''
+            website:'',
         }
     }
     changeHandler = (e) =>{
@@ -20,16 +19,25 @@ class Apply extends Component {
         })
     }
     submitHandler = (e) =>{
-        // e.preventDefault();
-        // this.props.loginUser(this.state,  this.props.history)
-        // this.setState({
-        //     email:'',
-        //     password:''
-        // })
-        // this.setState({
-        //     email:'',
-        //     password:''
-        // })
+        e.preventDefault();
+        console.log('user in submit', this.props.auth.user)
+        const postJobData = {
+            company_id:this.props.auth.user.userId,
+            name:this.props.auth.user.userName,
+            job_title:this.state.job_title,
+            description:this.state.description,
+            location:this.state.location,
+            address:this.state.address,
+            website:this.state.website
+        }
+        this.props.postNewJob(postJobData,  this.props.history)
+        this.setState({
+            job_title:'',
+            description:'',
+            location:'',
+            address:'',
+            website:'',
+        })
     }
     render() {
         const {user} = this.props.auth
@@ -41,28 +49,24 @@ class Apply extends Component {
                    <div className="ui segment">
                         <form className="ui form" onSubmit={this.submitHandler}>
                             <div className="field">
-                                <label>Name</label>
-                                <input type="text" onChange={this.changeHandler} name="name" value={this.state.name} />
+                                <label>Job Title</label>
+                                <input type="text" onChange={this.changeHandler} name="job_title" value={this.state.job_title} />
                             </div>
                             <div className="field">
-                                <label>Email</label>
-                                <input type="text" onChange={this.changeHandler} name="email" value={this.state.email} />
+                                <label>Description</label>
+                                <input type="text" onChange={this.changeHandler} name="description" value={this.state.description} />
                             </div>
                             <div className="field">
-                                <label>Contact</label>
-                                <input type="text" onChange={this.changeHandler} name="contact" value={this.state.contact} />
+                                <label>Location</label>
+                                <input type="text" onChange={this.changeHandler} name="location" value={this.state.location} />
                             </div>
                             <div className="field">
                                 <label>Address</label>
                                 <input type="text" onChange={this.changeHandler} name="address" value={this.state.address} />
                             </div>
                             <div className="field">
-                                <label>Qualification</label>
-                                <input type="text" onChange={this.changeHandler} name="qualification" value={this.state.qualification} />
-                            </div>
-                            <div className="field">
-                                <label>Skills</label>
-                                <input type="text" onChange={this.changeHandler} name="skills" value={this.state.skills} />
+                                <label>Website</label>
+                                <input type="text" onChange={this.changeHandler} name="wesite" value={this.state.website} />
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>
@@ -80,4 +84,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(Apply)
+export default connect(mapStateToProps, {})(PostJob)

@@ -7,18 +7,21 @@ class Login extends Component {
         super(props);
         this.state = {
             email:'',
-            password:''
+            password:'',
         }
     }
-    componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-          this.props.history.push('/dashboard');
-        }
-    }
+    // componentDidMount() {
+    //     console.log('componentdidmount', this.props.auth)
+    //     if (this.props.auth.isAuthenticated) {
+    //       this.props.history.push('/dashboard');
+    //     }
+    // }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-          this.props.history.push('/dashboard');
+        if(nextProps.auth.isAuthenticated && nextProps.auth.user.role == "student"){
+            this.props.history.push('/dashboard');
+        }else if(nextProps.auth.isAuthenticated && nextProps.auth.user.role == "company"){
+            this.props.history.push('/company_dashboard')
         }
     }
     changeHandler = (e) =>{
@@ -51,7 +54,7 @@ class Login extends Component {
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>
-                                <button className="ui blue fluid button">Login up</button>
+                                <button className="ui blue fluid button">Login</button>
                             </div>
                         </form>
                     </div>
