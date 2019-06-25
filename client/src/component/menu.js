@@ -1,61 +1,59 @@
 import React, { Component } from 'react'
-import{ Link, withRouter } from 'react-router-dom';
-import jwt_decode from 'jwt-decode'
+import{ Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions/authAction';
 
 class Menu extends Component {
-    logout (e){
+    onLogoutClick(e) {
         e.preventDefault();
-        localStorage.removeItem('jwtToken')
-        this.props.history.push('/login')
-        // window.location.reload();
-        
+        this.props.logoutUser();
     }
     render() {
-        const loginRegLink = (
-            <div className="sixteen wide column" style={{'marginBottom':'20px'}}>
-                <div className="ui large menu main_menu">
-                    <div className="item">
-                        <Link to="" className="ui small icon labeld button"><i className="icon home"></i>Trello </Link>
-                    </div>
-                    <div className="right menu">
-                        <div className="item">
-                            <Link style={{"color":"white", "fontSize":"20px"}} to="/login">Login</Link>
-                        </div>
-                        <div className="item">
-                            <Link style={{"color":"white", "fontSize":"20px"}} to="/register">register</Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-
-        const userLink = (
+        const { isAuthenticated, user } = this.props.auth;
+        const authLinks = (
             <div className="sixteen wide column" style={{'marginBottom':'20px'}}>
                 <div className="ui small menu main_menu">
                     <div className="item">
-                        <Link to="/profiles"><button className="ui icon button"><i className="icon home"></i></button></Link>
+                        <button className="ui labeled icon button"><i className="icon home"></i>Home</button>
                     </div>
                     <div className="item">
-                        <button className="ui labeled icon button"><i className="icon home"></i>Boards</button>
-                    </div>
-                    <div className="item ">
-                        <Link to="/create_board"><button className="ui icon button"><i className="plus icon"></i></button> </Link>
+                        <h4>Well come : <span>{user.userName}</span></h4>
                     </div>
                     <div className="item right floated">
-                        <button className="ui green button small" onClick={this.logout.bind(this)} to="/register">log out</button>
+                        <a href="" className="ui green button small" onClick={this.onLogoutClick.bind(this)}>{' '}log out</a>
                     </div>
                 </div>
             </div>
-        )
-
-        return(
-            <div>
-                {
-                    localStorage.jwtToken? userLink:loginRegLink
-                }
+        );
+        const guestLinks = (
+            <div className="sixteen wide column" style={{'marginBottom':'20px'}}>
+                <div className="ui large menu main_menu">
+                    <div className="item">
+                        <Link to="" className="ui small icon labeld button"><i className="icon home"></i>My project </Link>
+                    </div>
+                    <div className="right menu">
+                        <div className="item">
+                        <Link style={{"color":"", "fontSize":"20px"}} to="/login">Login</Link>
+                        </div>
+                        <div className="item">
+                             <Link style={{"color":"", "fontSize":"20px"}} to="/signup">register</Link>
+                        </div>
+                    </div>
+                </div>
             </div>
-        )
+        );
+        return (
+            <div>
+                {isAuthenticated ? authLinks : guestLinks}
+            </div>
+        );
     }
 }
 
-export default withRouter (Menu); 
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, { logoutUser })(
+    Menu
+);

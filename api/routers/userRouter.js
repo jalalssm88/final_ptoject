@@ -73,7 +73,7 @@ router.post('/login', (req, res, next)=>{
                 );
                 return res.status(200).json({
                     message: "Auth successful",
-                    token:token
+                    token:'Bearer ' + token
                 })
             }
             res.status(401).json({
@@ -88,6 +88,18 @@ router.post('/login', (req, res, next)=>{
         })
     })
 })
+
+// router.get(
+//     '/current',
+//     passport.authenticate('jwt', { session: false }),
+//     (req, res) => {
+//       res.json({
+//         id: req.user.id,
+//         name: req.user.name,
+//         email: req.user.email
+//       });
+//     }
+//   );
 
 router.get('/users', (req, res)=>{
     User.find().then(user=>{

@@ -10,11 +10,17 @@ class Login extends Component {
             password:''
         }
     }
-    // componentDidMount() {
-    //     if (this.props.auth.isAuthenticated) {
-    //       this.props.history.push('/dashboard');
-    //     }
-    // }
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+          this.props.history.push('/dashboard');
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+          this.props.history.push('/dashboard');
+        }
+    }
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
@@ -23,10 +29,6 @@ class Login extends Component {
     submitHandler = (e) =>{
         e.preventDefault();
         this.props.loginUser(this.state,  this.props.history)
-        this.setState({
-            email:'',
-            password:''
-        })
         this.setState({
             email:'',
             password:''

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {createUser} from '../actions/authAction'
+import { withRouter } from 'react-router-dom';
+
 
 class Signup extends Component {
     constructor(props){
@@ -9,6 +11,11 @@ class Signup extends Component {
             name:'',
             email:'',
             password:''
+        }
+    }
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
         }
     }
     changeHandler = (e) =>{
@@ -52,8 +59,8 @@ class Signup extends Component {
     }
 }
 
-const mapStateToProps = (state) =>({
-    user:state.user
-})
-
-export default connect(mapStateToProps,{createUser})(Signup);
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+  
+export default connect(mapStateToProps, { createUser  })(withRouter(Signup));

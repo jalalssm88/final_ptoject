@@ -10,19 +10,16 @@ const User = require('./api/routers/userRouter')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-// Connect to MongoDB
-// mongoose
-//   .connect(db)
-//   .then(() => console.log('MongoDB Connected'))
-//   .catch(err => console.log(err));
-
-mongoose.connect('mongodb://localhost/final_project', {useNewUrlParser:true})
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error'))
-db.once('open', function(){
-    console.log('db connected')
+mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser:true}, ()=>{
+    console.log('mongo db connected');
 })
+
+// mongoose.connect('mongodb://localhost/final_project', {useNewUrlParser:true})
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error'))
+// db.once('open', function(){
+//     console.log('db connected')
+// })
 
 // Use Routes
 app.use('/user', User);
@@ -41,5 +38,5 @@ app.use((error, req, res, next)=>{
   })
 })
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

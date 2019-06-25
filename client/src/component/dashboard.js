@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import {Link} from "react-router-dom"
 
 class Dashboard extends Component {
     constructor(props){
@@ -28,7 +29,8 @@ class Dashboard extends Component {
     }
     render() {
         const { user } = this.props.auth;
-        console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrr', user)
+        console.log('user in dashboard', user)
+        console.log('prpssss',this.props)
         return (
             <div className="ui grid">
                <div className="sixteen wide column">
@@ -36,10 +38,7 @@ class Dashboard extends Component {
                        <h4>Biwits Pvt Ltd</h4>
                        <h5>Job Title: <span>Python Developer</span></h5>
                        <p>Require a python software developer for a Product baseed company in karachi</p>
-                       <button className="ui small green button">Apply now</button>
-                       {
-                           console.log('userrrr', this.props)
-                       }
+                       <Link to='/apply' className="ui small green button">Apply now</Link>
                    </div>
                </div>
             </div>
