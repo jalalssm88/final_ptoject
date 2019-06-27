@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {createUser} from '../actions/authAction'
 import { withRouter } from 'react-router-dom';
-
+import {Link}  from 'react-router-dom'
 
 class Signup extends Component {
     constructor(props){
@@ -30,39 +30,52 @@ class Signup extends Component {
     }
     render() {
         return (
-            <div className="ui grid">
-                <div className="four wide column"></div>
+            <div className="ui grid stackable">
+                <div className="four wide column" style={{'height':'1px'}}></div>
                 <div className="eight wide column">
-                    <div className="ui segment" style={{"marginTop":"40px"}}>
-                        <form onSubmit={this.submitHandler} className="ui form">
-                            <div className="field">
-                                <label>Name</label>
-                                <input type="text" name="name" value={this.state.name} onChange={this.changeHandler} />
-                            </div>
-                            <div className="field">
-                                <label>Email</label>
-                                <input type="text" name="email" value={this.state.email} onChange={this.changeHandler} />
-                            </div>
-                            <div className="field">
-                                <label>Password</label>
-                                <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} />
-                            </div>
-                            <div className="field">
-                                <label>Role</label>
-                                <select name="role" onChange={this.changeHandler}>
-                                    <option value="">------------</option>
-                                    <option value="company">Company</option>
-                                    <option value="student">Student</option>
-                                </select>
-                            </div>
-                            <div className="field">
-                                <label>&nbsp;</label>
-                                <button className="ui blue fluid button">Sign up</button>
+                    <div className="ui segment form_segment">
+                        <h2 style={{'marginBottom':'2px'}}>Create and Account</h2>
+                        <span><Link to="/login">already have account</Link></span>
+                        <form onSubmit={this.submitHandler}>
+                            <div className="ui form signup_form">
+                                <div className="field">
+                                    <label>Name</label>
+                                    <div class="ui left icon input">
+                                        <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.changeHandler} />
+                                        <i class="user icon"></i>
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <label>Email</label>
+                                    <div class="ui left icon input">
+                                        <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.changeHandler} />
+                                        <i class="envelope icon"></i>
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <label>Password</label>
+                                    <div className="ui left icon input">
+                                        <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.changeHandler} />
+                                        <i class="lock icon"></i>
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <label>Role</label>
+                                    <select name="role" onChange={this.changeHandler}>
+                                        <option>-----------</option>
+                                        <option value="company">Company</option>
+                                        <option value="student">Student</option>
+                                    </select>
+                                </div>
+                                <div className="field">
+                                    <label>submit </label>
+                                    <button className="ui blue fluid button">Create</button>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div className="four wide column"></div>
+                <div className="four wide column" style={{'height':'1px'}}></div>
             </div>
         )
     }

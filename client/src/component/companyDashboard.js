@@ -12,7 +12,7 @@ class CompanyDashboard extends Component {
             <div className="ui grid">
                <div className="sixteen wide column">
                   <h2 style={{'float':'left'}}>Posted Job List View</h2>
-                  <Link to={'/post_job/'+user.userId} className="ui orange icon labeled right floated button"><i className="plus icon"></i> Post Job</Link>
+                  <Link to={'/post_newjob/'+user.userId} className="ui orange icon labeled right floated button"><i className="plus icon"></i> Post new Job</Link>
                </div>
             </div>
         )

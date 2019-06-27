@@ -7,7 +7,8 @@ class Menu extends Component {
     onLogoutClick(e) {
         e.preventDefault();
         this.props.logoutUser();
-        this.props.history.push('/login')
+        // this.props.history.push('/login')
+        window.location.href = "/"
     }
     render() {
         const { isAuthenticated, user } = this.props.auth;
@@ -34,10 +35,10 @@ class Menu extends Component {
                     </div>
                     <div className="right menu">
                         <div className="item">
-                        <Link style={{"color":"", "fontSize":"20px"}} to="/login">Login</Link>
+                        <Link style={{"color":"white", "fontSize":"20px"}} to="/login">Login</Link>
                         </div>
                         <div className="item">
-                             <Link style={{"color":"", "fontSize":"20px"}} to="/signup">register</Link>
+                             <Link style={{"color":"white", "fontSize":"20px"}} to="/signup">register</Link>
                         </div>
                     </div>
                 </div>

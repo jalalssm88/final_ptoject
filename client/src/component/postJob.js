@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import {createJobpost} from '../actions/postAction';
 
 class PostJob extends Component {
     constructor(props){
@@ -16,11 +16,10 @@ class PostJob extends Component {
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
-        })
+        })  
     }
     submitHandler = (e) =>{
         e.preventDefault();
-        console.log('user in submit', this.props.auth.user)
         const postJobData = {
             company_id:this.props.auth.user.userId,
             name:this.props.auth.user.userName,
@@ -30,7 +29,7 @@ class PostJob extends Component {
             address:this.state.address,
             website:this.state.website
         }
-        this.props.postNewJob(postJobData,  this.props.history)
+        this.props.createJobpost(postJobData,  this.props.history)
         this.setState({
             job_title:'',
             description:'',
@@ -40,9 +39,6 @@ class PostJob extends Component {
         })
     }
     render() {
-        const {user} = this.props.auth
-        console.log('user in apply form', user)
-        console.log('prpssss',this.props)
         return (
             <div className="ui grid">
                <div className="sixteen wide column">
@@ -66,7 +62,7 @@ class PostJob extends Component {
                             </div>
                             <div className="field">
                                 <label>Website</label>
-                                <input type="text" onChange={this.changeHandler} name="wesite" value={this.state.website} />
+                                <input type="text" onChange={this.changeHandler} name="website" value={this.state.website} />
                             </div>
                             <div className="field">
                                 <label>&nbsp;</label>
@@ -81,7 +77,8 @@ class PostJob extends Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth:state.auth,
+    jobpost:state.jobpost
 });
 
-export default connect(mapStateToProps, {})(PostJob)
+export default connect(mapStateToProps, {createJobpost})(PostJob)

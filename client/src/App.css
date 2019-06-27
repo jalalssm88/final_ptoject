@@ -31,3 +31,41 @@
     transform: rotate(360deg);
   }
 }
+.signup_form, .login_form {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.signup_form input, select, button{
+  height: 50px !important;
+}
+.signup_form, .login_form, input, select{
+  border-color: #8888c1 !important;
+}
+
+.login_form input, button{
+  height: 50px !important;
+}
+
+.form_segment{
+  box-shadow:  2px 2px 10px !important;
+  margin-top: 30px !important;
+}
+
+
+.start_header{
+  font-size: 48px;
+  color: white;
+  margin-top: 35px !important;
+}
+
+.start_para{
+  font-size: 23px;
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.main_menu{
+  background-color: #026aa7 !important;
+}
+

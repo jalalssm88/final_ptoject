@@ -1,22 +1,26 @@
 import isEmpty from '../validation/is-empty';
 
-import { SET_CURRENT_USER } from '../actions/types';
+import { CREATE_JOB, GET_JOBS } from '../actions/types';
 
 const initialState = {
-  job: {},
-  jobs: {},
+  jobs: [],
 };
 
-export default function(state = initialState, action) {
-  console.log('user auth payload', action.payload)
-  switch (action.type) {
-    case SET_CURRENT_USER:
-      return {
-        ...state,
-        isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
-      };
-    default:
-      return state;
+export default function(state = initialState, action){
+  switch(action.type){
+      case CREATE_JOB:
+          return{
+              ...state,
+              jobs:[action.payload, ...state.jobs]
+          }
+      case GET_JOBS:
+          return{
+              ...state,
+              jobs:action.payload
+          }
+      default:
+          return{
+              ...state
+          }
   }
 }

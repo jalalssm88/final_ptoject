@@ -1,28 +1,21 @@
 import axios from 'axios';
-import setAuthToken from '../utils/setAuthToken';
-import jwt_decode from 'jwt-decode';
-
-import {CREATE_NEW_JOB, GET_JOBS} from './types';
+import {CREATE_JOB, GET_JOBS} from './types';
 
 
-//create user
-export const createpostNewJob = (postJobData, history)=> dispatch =>{
-    axios.post('/jobs/new',postJobData)
+export const createJobpost = (postJobData, history)=> dispatch =>{
+    axios.post('/jobs/create_jobpost',postJobData)
     .then(res => dispatch({
-        type:CREATE_NEW_JOB,
+        type:CREATE_JOB,
         payload:res.data
     }))
 }
 
-//login user
-// export const loginUser = (userData)=> dispatch =>{
-//     axios.post('/user/login',userData)
-//     .then(res => {
-//         const { token } = res.data;
-//         localStorage.setItem('jwtToken', token);
-//         setAuthToken(token)
-//         const decoded = jwt_decode(token);
-//         dispatch(setCurrentUser(decoded));
-//     })
-// }
+export const getJobpost = ()=> dispatch =>{
+    axios.get('/jobs/get_jobpost').then(res => dispatch({
+        type:GET_JOBS,
+        payload:res.data
+    }))
+}
+
+
 
