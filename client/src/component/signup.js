@@ -40,23 +40,23 @@ class Signup extends Component {
                             <div className="ui form signup_form">
                                 <div className="field">
                                     <label>Name</label>
-                                    <div class="ui left icon input">
+                                    <div className="ui left icon input">
                                         <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.changeHandler} />
-                                        <i class="user icon"></i>
+                                        <i className="user icon"></i>
                                     </div>
                                 </div>
                                 <div className="field">
                                     <label>Email</label>
-                                    <div class="ui left icon input">
+                                    <div className="ui left icon input">
                                         <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.changeHandler} />
-                                        <i class="envelope icon"></i>
+                                        <i className="envelope icon"></i>
                                     </div>
                                 </div>
                                 <div className="field">
                                     <label>Password</label>
                                     <div className="ui left icon input">
                                         <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.changeHandler} />
-                                        <i class="lock icon"></i>
+                                        <i className="lock icon"></i>
                                     </div>
                                 </div>
                                 <div className="field">

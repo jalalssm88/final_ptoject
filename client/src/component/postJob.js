@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {createJobpost} from '../actions/postAction';
 
+
 class PostJob extends Component {
     constructor(props){
         super(props);
@@ -13,6 +14,7 @@ class PostJob extends Component {
             website:'',
         }
     }
+    
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
