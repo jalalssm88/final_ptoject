@@ -43,7 +43,10 @@ class PostJob extends Component {
     render() {
         return (
             <div className="ui grid">
-               <div className="sixteen wide column">
+                <div className="sixteen wide column">
+                    <h2>Post a New Job</h2>
+                </div>
+                <div className="sixteen wide column">
                    <div className="ui segment">
                         <form className="ui form" onSubmit={this.submitHandler}>
                             <div className="field">
@@ -66,9 +69,9 @@ class PostJob extends Component {
                                 <label>Website</label>
                                 <input type="text" onChange={this.changeHandler} name="website" value={this.state.website} />
                             </div>
-                            <div className="field">
+                            <div className="field" style={{"textAlign":"center"}}>
                                 <label>&nbsp;</label>
-                                <button className="ui blue button">submit</button>
+                                <button className="ui small labeled icon blue button"><i className="right arrow icon"></i> submit</button>
                             </div>
                         </form>
                    </div>

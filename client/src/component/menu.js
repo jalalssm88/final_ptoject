@@ -19,7 +19,7 @@ class Menu extends Component {
                         <button className="ui labeled icon button"><i className="icon home"></i>Home</button>
                     </div>
                     <div className="item">
-                        <h4>Well come : <span>{user.userName}</span></h4>
+                        <h3 style={{"color":"#e6f8d3"}}>Well come : <span>{user.userName}</span></h3>
                     </div>
                     <div className="item right floated">
                         <button  className="ui green button small" onClick={this.onLogoutClick.bind(this)} to="/login">{' '}log out</button>

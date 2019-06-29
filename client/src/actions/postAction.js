@@ -7,7 +7,7 @@ export const createJobpost = (postJobData, history)=> dispatch =>{
     .then(res => dispatch({
         type:CREATE_JOB,
         payload:res.data
-    }))
+    })).then(res=> history.push('/company_dashboard'))
 }
 
 export const getJobpost = ()=> dispatch =>{
@@ -18,7 +18,7 @@ export const getJobpost = ()=> dispatch =>{
     }))
 }
 
-export const getsingleJob = company_id=> dispatch =>{
+export const getsingleJob = (company_id)=> dispatch =>{
     dispatch(setPostLoading());
     axios.get('/jobs/get_jobpost/'+company_id).then(res => dispatch({
         type:GET_JOB,

@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log('user auth payload', action.payload)
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

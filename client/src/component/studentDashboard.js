@@ -9,23 +9,24 @@ class StudentDashboard extends Component {
     }
     render() {
         const { user } = this.props.auth;
-        const { jobs, loading } = this.props.jobpost.jobs
+        const { jobs } = this.props.jobpost.jobs
         console.log('props in std ddash', this.props.jobpost.jobs)
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
                     {
-                        jobs==null || loading ?<div className="ui loader active">loading</div>:jobs.map(newjob=>(
-                            <div className="ui segment" key={newjob._id}>
-                                <h3>{newjob.name}</h3>
-                                <h5>{newjob.job_title}</h5>
-                                <p>{newjob.description}</p>
-                                <h6>Location: <span>{newjob.location}</span></h6>
-                                <h6>Address: <span>{newjob.address}</span></h6>
-                                <h6>Visit website: <span>{newjob.website}</span></h6>
-                                <Link to={'/apply_job/'+newjob._id} className="ui small green button">Apply now</Link>
-                            </div>
-                        ))
+                        jobs==undefined?console.log('empy'): jobs.map(newjob=>(
+                                <div className="ui segment" key={newjob._id}>
+                                    <h3>{newjob.name}</h3>
+                                    <h5>{newjob.job_title}</h5>
+                                    <p>{newjob.description}</p>
+                                    <h6>Location: <span>{newjob.location}</span></h6>
+                                    <h6>Address: <span>{newjob.address}</span></h6>
+                                    <h6>Visit website: <span>{newjob.website}</span></h6>
+                                    <Link to={'/apply_job/'+newjob._id} className="ui small green button">Apply now</Link>
+                                </div>
+                            )
+                        )
                     }
                 </div>
             </div>

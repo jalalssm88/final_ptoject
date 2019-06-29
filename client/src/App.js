@@ -14,6 +14,7 @@ import Login from './component/login'
 import CompanyDashboard from './component/companyDashboard';
 import StudentDashboard from './component/studentDashboard';
 import PostJob from './component/postJob';
+import ApplyJob from './component/applyJob';
 
 
 import setAuthToken from '../../client/src/utils/setAuthToken';
@@ -53,6 +54,7 @@ function App() {
               <Route path="/company_dashboard" component={CompanyDashboard} />
               <Route path="/student_dashboard" component={StudentDashboard} />
               <Route path="/post_newjob/:id" component={PostJob} />
+              <Route path="/apply_job/:id" component={ApplyJob} />
             </Switch>
           </div>
         </Router>

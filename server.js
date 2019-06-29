@@ -6,25 +6,27 @@ const app = express();
 
 const User = require('./api/routers/userRouter');
 const Jobpost = require('./api/routers/jobpostRouter');
+const Appliedjob = require('./api/routers/appliedjobRouter');
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser:true}, ()=>{
-    console.log('mongo db connected');
-})
-
-// mongoose.connect('mongodb://localhost/final_project', {useNewUrlParser:true})
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error'))
-// db.once('open', function(){
-//     console.log('db connected')
+// mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser:true}, ()=>{
+//     console.log('mongo db connected');
 // })
+
+mongoose.connect('mongodb://localhost/job_searching_app', {useNewUrlParser:true})
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'))
+db.once('open', function(){
+    console.log('db connected')
+})
 
 // Use Routes
 app.use('/user', User);
-app.use('/jobs', Jobpost)
+app.use('/jobs', Jobpost);
+app.use('/jobs', Appliedjob);
 
 app.use((req, res, next)=> {
   const error = new Error('Not found');

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom"
 import {getsingleJob} from '../actions/postAction';
+import { join } from 'path';
 
 
 class CompanyDashboard extends Component {
@@ -11,6 +12,8 @@ class CompanyDashboard extends Component {
     render() {
         const { user } = this.props.auth;
         const {job, loading} = this.props.job;
+        console.log('jonnnnn====', job)
+        console.log('porpss', this.props.job)
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
@@ -18,6 +21,8 @@ class CompanyDashboard extends Component {
                     <Link to={'/post_newjob/'+user.userId} className="ui orange icon labeled right floated button"><i className="plus icon"></i> Post new Job</Link>
                 </div>
                 <div className="sixteen wide column">
+                    {
+                        job == null || loading ? <div className="ui loader active"></div>:
                     <table className="ui celled table">
                         <thead>
                             <tr>
@@ -30,14 +35,23 @@ class CompanyDashboard extends Component {
                         </thead>
                         <tbody>
                             {
-                                job == null || loading?<div className="ui loader active">loading</div>:
-                            
-                                job.map(jobss=>(
-                                    <tr>hello</tr>
+                                
+                                job.map(job=>(
+                                    <tr key={job._id}>
+                                        <td>{job.name}</td>
+                                        <td>{job.job_title}</td>
+                                        <td>{job.location}</td>
+                                        <td>{job.website}</td>
+                                        <td>{job.address}</td>
+                                    </tr>
+
+
+
                                 ))
                             }
                         </tbody>
                     </table>
+                    }
                 </div>
             </div>
         )

@@ -9,8 +9,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action){
-    console.log('in post reducer type', action.type)
-    console.log('in post reducer', action.payload)
+    console.log('data in post reducer', action.payload)
   switch(action.type){
         case JOB_LOADING:
             return {
@@ -30,7 +29,8 @@ export default function(state = initialState, action){
         case GET_JOB:
             return{
                 ...state,
-                job:action.payload
+                job:action.payload,
+                loading:false,
             }
         default:
             return{
