@@ -53,4 +53,34 @@ router.get('/get_jobpost', (req, res, next)=>{
     })
 });
 
+router.get('/get_jobpost/:id', (req, res, next)=>{
+    const id = req.params.id;
+    console.log('id=======', id)
+    var query ={
+        "company_id":id
+    }
+    Jobpost.find (query) 
+    .select('_id company_id name job_title description location address website')
+    // // .populate('jobpost')
+    .exec()
+    .then(doc => {
+        console.log('doc', doc)
+        if(doc){
+            res.status(200).json({
+                message: "success",
+                product:doc
+            })
+        }else{
+            res.status(404).json({
+                message: "no data found against this id",
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+});
+
 module.exports = router;
