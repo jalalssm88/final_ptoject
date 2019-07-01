@@ -15,14 +15,21 @@ class Menu extends Component {
         const authLinks = (
             <div className="sixteen wide column" style={{'marginBottom':'20px'}}>
                 <div className="ui small menu main_menu">
+                    {
+                        user.role === "student"?
+                        <div className="item">
+                            <Link to="/student_dashboard" className="ui labeled icon button"><i className="icon home"></i>Home</Link>
+                        </div>:
+                        <div className="item">
+                            <Link to="/company_dashboard" className="ui labeled icon button"><i className="icon home"></i>Home</Link>
+                        </div>
+                    }
+                    
                     <div className="item">
-                        <button className="ui labeled icon button"><i className="icon home"></i>Home</button>
-                    </div>
-                    <div className="item">
-                        <h3 style={{"color":"#e6f8d3"}}>Well come : <span>{user.userName}</span></h3>
+                        <h3 style={{"color":"#e6f8d3"}}>{user.userName}</h3>
                     </div>
                     <div className="item right floated">
-                        <button  className="ui green button small" onClick={this.onLogoutClick.bind(this)} to="/login">{' '}log out</button>
+                        <Link  className="ui green button small" onClick={this.onLogoutClick.bind(this)} to="/login">{' '}log out</Link>
                     </div>
                 </div>
             </div>
