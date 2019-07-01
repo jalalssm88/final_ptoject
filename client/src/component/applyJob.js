@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from "axios"
+import axios from "axios";
+import {applyJobpost} from '../actions/postAction';
 
 
 class ApplyJob extends Component {
@@ -26,13 +27,7 @@ class ApplyJob extends Component {
         e.preventDefault();
         var $form = document.getElementById('apply_job');
         let data = new FormData($form);
-        axios.post('/products', data)
-        .then(res=>{
-            console.log('res', res.data.status)
-            if(res.data.status == "success"){
-                this.props.history.push('/products')
-            }
-        })
+        this.props.applyJobpost(data)
     }
     render() {
         return (
@@ -100,4 +95,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(ApplyJob)
+export default connect(mapStateToProps, {applyJobpost})(ApplyJob)

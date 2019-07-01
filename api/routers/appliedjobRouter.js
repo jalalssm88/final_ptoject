@@ -22,10 +22,10 @@ const upload = multer({
 
 const AppliedJob = require('../models/appliedjobModel');
 
-router.post('/apply_jobpost', (req, res, next)=>{
+router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     console.log('req body', req.body)
     console.log('req file', req.file.path)
-    const new_applyJob = new CreateProduct({
+    const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
         student_id:req.body.student_id,
         name:req.body.name,
@@ -51,7 +51,7 @@ router.post('/apply_jobpost', (req, res, next)=>{
 });
 
 router.get('/get_applied_job', (req, res, next)=>{
-    Jobpost.find()
+    AppliedJob.find()
     .select('_id job_id student_id name email contact qualification experience file_cv skills')
     .exec()
     .then(docs=>{
@@ -81,14 +81,15 @@ router.get('/get_applied_job', (req, res, next)=>{
     })
 });
 
-router.get('/get_applied_job/:id', (req, res, next)=>{
+router.get('/apply_jobpost/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('id=======', id)
     var query ={
         "student_id":id
     }
-    Jobpost.find (query) 
+    AppliedJob.find (query) 
     .select('_id job_id student_id name email contact qualification experience file_cv skills')
+    .populate('job_title', 'name')
     // // .populate('jobpost')
     .exec()
     .then(doc => {

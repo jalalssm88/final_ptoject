@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
-import {getJobpost} from '../actions/postAction';
+import {getJobpost, getApplyjobStudent} from '../actions/postAction';
 
 class StudentDashboard extends Component {
     componentDidMount(){
         this.props.getJobpost();
+        this.props.getApplyjobStudent(this.props.auth.user.userId);
     }
     render() {
         const { user } = this.props.auth;
         const { jobs } = this.props.jobpost.jobs
-        console.log('props in std ddash', this.props.jobpost.jobs)
+        console.log('props in std ddash', this.props)
+        const {apply_student_job} = this.props.applyjob
+        console.log('apply student job', apply_student_job)
         return (
             <div className="ui grid">
-                <div className="sixteen wide column">
+                <div className="four wide column">
+                    <div className="ui segment">
+                        <h1>Applied Jobs</h1>
+                    </div>
+                    <div className="ui segment">
+                        
+                    </div>
+                </div>
+                <div className="twelve wide column">
+                    <div className="ui segment">
+                        <h1>Latest Jobs</h1>
+                    </div>
                     {
                         jobs==undefined?console.log('empy'): jobs.map(newjob=>(
                                 <div className="ui segment" key={newjob._id}>
@@ -36,7 +50,8 @@ class StudentDashboard extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    jobpost: state.jobpost
+    jobpost: state.jobpost,
+    applyjob: state.getapply_job
 });
 
-export default connect(mapStateToProps, {getJobpost})(StudentDashboard)
+export default connect(mapStateToProps, {getJobpost, getApplyjobStudent})(StudentDashboard)
