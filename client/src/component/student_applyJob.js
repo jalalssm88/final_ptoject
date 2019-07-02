@@ -1,49 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from "axios";
 import {applyJobpost, getApplyjobStudent} from '../actions/postAction';
 
-
 class StudentApplyJob extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            name:'',
-            email:'',
-            contact:'',
-            qualification:'',
-            experience:'',
-            skills:''
-        }
-    }
     componentDidMount(){
         this.props.getApplyjobStudent(this.props.auth.user.userId)
     }
-    changeHandler = (e) =>{
-        this.setState({
-            [e.target.name]:e.target.value
-        })
-    }
-
-    submitHandler = (e) =>{
-        e.preventDefault();
-        var $form = document.getElementById('apply_job');
-        let data = new FormData($form);
-        this.props.applyJobpost(data)
-    }
     render() {
-        const {datas, count} = this.props.applyjob.apply_student_job;
+        const {datas} = this.props.applyjob.apply_student_job;
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
-                    <h2>Applied Job List View</h2>
+                    <h2 id="main_header"> Your Applied Job List View</h2>
+                    <hr style={{"width":"10%", "float":"left"}}/>
                 </div>
                <div className="sixteen wide column">
+                    {datas == null? <div className="ui loader active"></div>:
                     <table className="ui celled table">
+                        <thead>
+                            <tr>
+                            {
+                                datas == null?console.log('load'):Object.keys(datas[0]).map((header, index)=>(
+                                    <th key={index}>{header}</th>
+                                ))                           
+                            }
+                            </tr>
+                        </thead>
+
                         <tbody>
                             {
-                                datas.map(item=>(
-                                    <tr>
+                                datas.map((item, index)=>(
+                                    <tr key={index}>
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.experience}</td>
@@ -56,6 +43,7 @@ class StudentApplyJob extends Component {
                             }
                         </tbody>
                     </table>
+                    }
                </div>
             </div>
         )

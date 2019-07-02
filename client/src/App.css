@@ -69,3 +69,14 @@
   background-color: #026aa7 !important;
 }
 
+#main_header{
+  margin-bottom: 0px;
+}
+
+.counts_segment{
+  text-align: center;
+}
+.counts_segment h4{
+  font-size: 20px;
+  margin-bottom: 0px;
+}
