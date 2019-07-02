@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from "axios";
-import {applyJobpost} from '../actions/postAction';
+import {applyJobpost, getApplyjobStudent} from '../actions/postAction';
 
 
 class ApplyJob extends Component {
@@ -16,7 +16,9 @@ class ApplyJob extends Component {
             skills:''
         }
     }
-
+    componentDidMount(){
+        this.props.getApplyjobStudent(this.props.auth.user.userId)
+    }
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]:e.target.value
@@ -27,9 +29,10 @@ class ApplyJob extends Component {
         e.preventDefault();
         var $form = document.getElementById('apply_job');
         let data = new FormData($form);
-        this.props.applyJobpost(data)
+        this.props.applyJobpost(data, this.props.history, this.props.auth.user.userId)
     }
     render() {
+        const {datas, count} = this.props.applyjob.apply_student_job;
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
@@ -92,7 +95,9 @@ class ApplyJob extends Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    applyjob: state.getapply_job
+
 });
 
-export default connect(mapStateToProps, {applyJobpost})(ApplyJob)
+export default connect(mapStateToProps, {applyJobpost, getApplyjobStudent})(ApplyJob)

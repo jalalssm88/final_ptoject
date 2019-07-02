@@ -11,20 +11,40 @@ class StudentDashboard extends Component {
     render() {
         const { user } = this.props.auth;
         const { jobs } = this.props.jobpost.jobs
-        console.log('props in std ddash', this.props)
-        const {apply_student_job} = this.props.applyjob
-        console.log('apply student job', apply_student_job)
+        const {count} = this.props.applyjob.apply_student_job;
         return (
             <div className="ui grid">
-                <div className="four wide column">
-                    <div className="ui segment">
-                        <h1>Applied Jobs</h1>
-                    </div>
-                    <div className="ui segment">
-                        
-                    </div>
+                <div className="sixteen wide column">
+                   <div className="ui four column grid">
+                        <div className="column">
+                            <div className="ui segment">
+                                <h3>Welcome: <span>{user.userName}</span></h3>
+                            </div>
+                        </div>
+                        <div className="column">
+                            <div className="ui segment">
+                                <h4>{count}</h4>
+                                <p>No of Job Applied</p>
+                                <Link to={`/applied_job_list/${user.userId}`} className="ui mini blue button">view all</Link> 
+                            </div>
+                        </div>
+                        <div className="column">
+                            <div className="ui segment">
+                                <h4>5</h4>
+                                <p>No of Job Aproved</p>
+                                <Link to={`/posted_job_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
+                            </div>
+                        </div>
+                        <div className="column">
+                            <div className="ui segment">
+                                <h4>5</h4>
+                                <p>No of Job Rejected</p>
+                                <Link to={`/posted_job_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
+                            </div>
+                        </div>
+                   </div>
                 </div>
-                <div className="twelve wide column">
+                <div className="sixteen wide column">
                     <div className="ui segment">
                         <h1>Latest Jobs</h1>
                     </div>

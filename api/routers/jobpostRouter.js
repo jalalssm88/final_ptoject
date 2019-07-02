@@ -64,9 +64,23 @@ router.get('/get_jobpost/:id', (req, res, next)=>{
     // // .populate('jobpost')
     .exec()
     .then(doc => {
-        console.log('doc', doc)
+        const response ={
+            count:doc.length,
+            job:doc.map(doc=>{
+                return{
+                    _id:doc._id,
+                    company_id:doc.company_id,
+                    name:doc.name,
+                    job_title:doc.job_title,
+                    description:doc.description,
+                    location:doc.location,
+                    address:doc.address,
+                    website:doc.website,
+                }
+            })
+        }
         if(doc){
-            res.status(200).json(doc)
+            res.status(200).json(response)
         }else{
             res.status(404).json({
                 message: "no data found against this id",

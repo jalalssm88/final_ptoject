@@ -2,12 +2,12 @@ import axios from 'axios';
 import {CREATE_JOB, GET_JOBS, JOB_LOADING, GET_JOB, APPLY_JOB, GET_APPLY_JOB_STUDENT} from './types';
 
 //company create new job
-export const createJobpost = (postJobData, history)=> dispatch =>{
+export const createJobpost = (postJobData, history, user_id)=> dispatch =>{
     axios.post('/jobs/create_jobpost',postJobData)
     .then(res => dispatch({
         type:CREATE_JOB,
         payload:res.data
-    })).then(res=> history.push('/company_dashboard'))
+    })).then(res=> history.push('/posted_job_listview/'+user_id))
 }
 
 //getting all jobs of different companies
@@ -29,11 +29,11 @@ export const getsingleJob = (company_id)=> dispatch =>{
 }
 
 //student apply for job of any company's post
-export const applyJobpost = (applyJobData, history) => dispatch =>{
+export const applyJobpost = (applyJobData, history, user) => dispatch =>{
     axios.post('/jobs/apply_jobpost', applyJobData).then(res => dispatch({
         type:APPLY_JOB,
         payload:res.data
-    }))
+    })).then(res=> history.push('/applied_job_list/'+user))
 }
 
 export const getApplyjobStudent = (student_id) => dispatch =>{

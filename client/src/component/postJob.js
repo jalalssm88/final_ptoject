@@ -31,7 +31,7 @@ class PostJob extends Component {
             address:this.state.address,
             website:this.state.website
         }
-        this.props.createJobpost(postJobData,  this.props.history)
+        this.props.createJobpost(postJobData,  this.props.history, this.props.auth.user.userId)
         this.setState({
             job_title:'',
             description:'',
