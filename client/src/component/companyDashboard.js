@@ -26,7 +26,6 @@ class CompanyDashboard extends Component {
                             <div className="ui segment">
                                 <h3>Wellcome: <span>{user.userName}</span></h3>
                                 <Link to={'/post_newjob/'+user.userId} className="ui orange mini icon labeled button"><i className="plus icon"></i> Post new Job</Link>
-
                             </div>
                          </div>
                         <div className="column">
@@ -39,8 +38,8 @@ class CompanyDashboard extends Component {
                         <div className="column">
                             <div className="ui segment">
                                 <h4>4</h4>
-                                <p>No of Response</p>
-                                <Link to="" className="ui mini blue button">view all</Link> 
+                                <p>No of Applications</p>
+                                <Link to={`/application_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
                         </div>
                     </div>

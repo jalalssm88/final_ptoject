@@ -8,6 +8,8 @@ class StudentApplyJob extends Component {
     }
     render() {
         const {datas} = this.props.applyjob.apply_student_job;
+        console.log('datassssssss in std dashboard', datas)
+        console.log('type of datas', typeof(datas))
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
@@ -15,34 +17,39 @@ class StudentApplyJob extends Component {
                     <hr style={{"width":"10%", "float":"left"}}/>
                 </div>
                <div className="sixteen wide column">
-                    {datas == null? <div className="ui loader active"></div>:
-                    <table className="ui celled table">
-                        <thead>
-                            <tr>
-                            {
-                                datas == null?console.log('load'):Object.keys(datas[0]).map((header, index)=>(
-                                    <th key={index}>{header}</th>
-                                ))                           
-                            }
-                            </tr>
-                        </thead>
+                    {
+                        ( (datas == undefined || datas.length == 0)? <div>No Data found</div>:
+                            ( ( datas == null  )?<div className="ui loader active"></div>
+                                :
+                                <table className="ui celled table">
+                                    <thead>
+                                        <tr>
+                                        {
+                                            datas == null?console.log('load'):Object.keys(datas[0]).map((header, index)=>(
+                                                <th key={index}>{header}</th>
+                                            ))                           
+                                        }
+                                        </tr>
+                                    </thead>
 
-                        <tbody>
-                            {
-                                datas.map((item, index)=>(
-                                    <tr key={index}>
-                                        <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.experience}</td>
-                                        <td>{item.company}</td>
-                                        <td>{item.apply_for}</td>
+                                    <tbody>
+                                        {
+                                            datas.map((item, index)=>(
+                                                <tr key={index}>
+                                                    <td>{item.name}</td>
+                                                    <td>{item.email}</td>
+                                                    <td>{item.experience}</td>
+                                                    <td>{item.company}</td>
+                                                    <td>{item.apply_for}</td>
 
 
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                        )
                     }
                </div>
             </div>

@@ -27,6 +27,7 @@ class Signup extends Component {
     submitHandler = (e) =>{
         e.preventDefault();
         this.props.createUser(this.state, this.props.history)
+        
     }
     render() {
         return (

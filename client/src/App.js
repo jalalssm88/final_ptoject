@@ -17,6 +17,7 @@ import PostJob from './component/postJob';
 import ApplyJob from './component/applyJob';
 import PostedJobsView from './component/postedjonView';
 import StudentApplyJob from './component/student_applyJob'
+import Applications from './component/applications'
 
 
 import setAuthToken from '../../client/src/utils/setAuthToken';
@@ -59,6 +60,7 @@ function App() {
               <Route path="/apply_job/:id" component={ApplyJob} />
               <Route path="/posted_job_listview/:id" component={PostedJobsView} />
               <Route path="/applied_job_list/:id" component={StudentApplyJob}/>
+              <Route path="/application_listview/:id" component={Applications} />
             </Switch>
           </div>
         </Router>

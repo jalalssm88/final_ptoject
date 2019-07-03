@@ -23,8 +23,6 @@ const upload = multer({
 const AppliedJob = require('../models/appliedjobModel');
 
 router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
-    console.log('req body', req.body)
-    console.log('req file', req.file.path)
     const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
         student_id:req.body.student_id,
@@ -83,7 +81,6 @@ router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
 
 router.get('/apply_jobpost/:id', (req, res, next)=>{
     const id = req.params.id;
-    console.log('id=======', id)
     var query ={
         "student_id":id
     }
@@ -91,7 +88,6 @@ router.get('/apply_jobpost/:id', (req, res, next)=>{
     .populate('job_id')
     .exec()
     .then(doc => {
-        
         var response = {
             count:doc.length,
             datas: doc.map(item=>{
@@ -104,9 +100,6 @@ router.get('/apply_jobpost/:id', (req, res, next)=>{
                 }
             })
         }
-
-        
-        console.log('response to send ', response)
         if(doc){
             res.status(200).json(response)
         }else{
@@ -114,6 +107,47 @@ router.get('/apply_jobpost/:id', (req, res, next)=>{
                 message: "no data found against this id",
             })
         }
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+});
+
+router.get('/get_applications/:id', (req, res, next)=>{
+    const id = req.params.id;
+    console.log('id=======', id)
+    var query ={
+        "jon_id":id
+    }
+    AppliedJob.find (query) 
+    // .populate('job_id')
+    .exec()
+    .then(doc => {
+        console.log('docc====of application', doc)
+        // var response = {
+        //     count:doc.length,
+        //     datas: doc.map(item=>{
+        //         return{
+        //             name:item.name,
+        //             email:item.email,
+        //             experience:item.experience,
+        //             company:item.job_id.name,
+        //             apply_for:item.job_id.job_title
+        //         }
+        //     })
+        // }
+
+        
+        // console.log('response to send ', response)
+        // if(doc){
+        //     res.status(200).json(response)
+        // }else{
+        //     res.status(404).json({
+        //         message: "no data found against this id",
+        //     })
+        // }
     })
     .catch(err => {
         res.status(500).json({

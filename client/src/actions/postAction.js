@@ -44,6 +44,17 @@ export const getApplyjobStudent = (student_id) => dispatch =>{
     }))
 }
 
+export const getApplication = (job_id) => dispatch =>{
+    dispatch(setPostLoading());
+    axios.get('/jobs/get_applications/'+job_id).then(res => 
+        // dispatch({
+        //     type:GET_APPLY_JOB_STUDENT,
+        //     payload:res.data
+        // })
+        console.log('hel')
+    )
+}
+
 export const setPostLoading = () => {
     return {
       type: JOB_LOADING

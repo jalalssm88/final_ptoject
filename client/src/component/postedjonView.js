@@ -17,39 +17,42 @@ class PostedJobsView extends Component {
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
-                    <h2 style={{'float':'left'}}>Company Dashboard</h2>
+                    <h2 style={{'float':'left'}}>Your Posted Job List View</h2>
                     <Link to={'/post_newjob/'+user.userId} className="ui orange mini right floated icon labeled button"><i className="plus icon"></i> Post new Job</Link>
-
                 </div>
                
                 <div className="sixteen wide column">
                     {
-                    job == null || loading ? <div className="ui loader active"></div>:
-                    <table className="ui celled table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Job Title</th>
-                                <th>Location</th>
-                                <th>Website</th>
-                                <th>Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                
-                                job.map(job=>(
-                                    <tr key={job._id}>
-                                        <td>{job.name}</td>
-                                        <td>{job.job_title}</td>
-                                        <td>{job.location}</td>
-                                        <td>{job.website}</td>
-                                        <td>{job.address}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
+                        ((job == undefined || job.length == 0)?
+                            <div>No Data found</div>:
+                            ((job == null || count == null)?
+                                <div className="ui loader active"></div>:
+                                <table className="ui celled table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Job Title</th>
+                                            <th>Location</th>
+                                            <th>Website</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            job.map(job=>(
+                                                <tr key={job._id}>
+                                                    <td>{job.name}</td>
+                                                    <td>{job.job_title}</td>
+                                                    <td>{job.location}</td>
+                                                    <td>{job.website}</td>
+                                                    <td>{job.address}</td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                        )
                     }
                 </div>
             </div>
