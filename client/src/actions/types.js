@@ -6,5 +6,7 @@ export const JOB_LOADING = 'JOB_LOADING'
 export const GET_JOB = 'GET_JOB'
 export const APPLY_JOB = 'APPLY_JOB'
 export const GET_APPLY_JOB_STUDENT = 'GET_APPLY_JOB_STUDENT';
+export const GET_APPLICATION_COUNT = 'GET_APPLICATION_COUNT';
+export const GET_APPLICATION_DETAIL = 'GET_APPLICATION_DETAIL'
 
 //therse are types

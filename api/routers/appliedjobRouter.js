@@ -26,6 +26,7 @@ router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
         student_id:req.body.student_id,
+        company_id:req.body.company_id,
         name:req.body.name,
         email:req.body.email,
         contact:req.body.contact,
@@ -34,6 +35,7 @@ router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
         file_cv:req.file.path,
         skills:req.body.skills
     })
+    console
     new_applyJob.save()
     .then(posts => {
         res.status(201).json({
@@ -119,35 +121,31 @@ router.get('/get_applications/:id', (req, res, next)=>{
     const id = req.params.id;
     console.log('id=======', id)
     var query ={
-        "jon_id":id
+        "company_id":id
     }
     AppliedJob.find (query) 
     // .populate('job_id')
+    .select('_id job_id student_id company_id name email contact qualification experience file_cv skills')
     .exec()
     .then(doc => {
         console.log('docc====of application', doc)
-        // var response = {
-        //     count:doc.length,
-        //     datas: doc.map(item=>{
-        //         return{
-        //             name:item.name,
-        //             email:item.email,
-        //             experience:item.experience,
-        //             company:item.job_id.name,
-        //             apply_for:item.job_id.job_title
-        //         }
-        //     })
-        // }
-
-        
-        // console.log('response to send ', response)
-        // if(doc){
-        //     res.status(200).json(response)
-        // }else{
-        //     res.status(404).json({
-        //         message: "no data found against this id",
-        //     })
-        // }
+        const response = {
+            counts : doc.length,
+            data:doc.map(item=>{
+                return{
+                    company_id:item.company_id,
+                    job_id: item.job_id,
+                    student_id:item.student_id,
+                }
+            })
+        }
+        if(doc){
+            res.status(200).json(response)
+        }else{
+            res.status(404).json({
+                message: "no data found against this id",
+            })
+        }
     })
     .catch(err => {
         res.status(500).json({
@@ -155,5 +153,49 @@ router.get('/get_applications/:id', (req, res, next)=>{
         })
     })
 });
+
+
+router.get('/get_applications_detail/:id', (req, res, next)=>{
+    const id = req.params.id;
+    console.log('id=======', id)
+    var query ={
+        "job_id":id
+    }
+    AppliedJob.find (query) 
+    // .populate('job_id')
+    .select('_id job_id student_id company_id name email contact qualification experience file_cv skills')
+    .exec()
+    .then(doc => {
+        console.log('docc====of application', doc)
+        const response = {
+            counts : doc.length,
+            data:doc.map(item=>{
+                return{
+                    _id:item._id,
+                    name:item.name,
+                    email:item.email,
+                    qualification:item.qualification,
+                    experience:item.experience,
+                    skills:item.skills,
+                    file_cv:item.file_cv
+                }
+            })
+        }
+        if(doc){
+            res.status(200).json(response)
+        }else{
+            res.status(404).json({
+                message: "no data found against this id",
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+});
+
+
 
 module.exports = router;

@@ -8,6 +8,9 @@ const AppliedjobSchema = new Schema({
     student_id:{
         type:mongoose.Types.ObjectId, ref:'user'
     },
+    company_id:{
+        type:mongoose.Types.ObjectId, ref:'user'
+    },
     name:{
         type:String,
     },
@@ -23,7 +26,7 @@ const AppliedjobSchema = new Schema({
     experience:{
         type:String
     },
-    cv_file:{
+    file_cv:{
         type:String
     },
     skills:{

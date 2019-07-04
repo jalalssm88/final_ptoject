@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom"
-import {getsingleJob} from '../actions/postAction';
+import {getsingleJob, getApplication} from '../actions/postAction';
 import { join } from 'path';
 
 
 class CompanyDashboard extends Component {
     componentDidMount(){
         this.props.getsingleJob(this.props.auth.user.userId)
+        this.props.getApplication(this.props.auth.user.userId)
+
     }
+
     render() {
         const { user } = this.props.auth;
         const {job, count} = this.props.jobpost.job;
-        const {loading} = this.props.jobpost
-        console.log('job ', job)
-        console.log('count', count)
+        const {counts} = this.props.getapply_job.get_application_count
+        console.log('proppppps2222', this.props.getapply_job)
+
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
@@ -37,7 +40,7 @@ class CompanyDashboard extends Component {
                         </div>
                         <div className="column">
                             <div className="ui segment">
-                                <h4>4</h4>
+                                <h4>{counts}</h4>
                                 <p>No of Applications</p>
                                 <Link to={`/application_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
@@ -84,7 +87,8 @@ class CompanyDashboard extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    jobpost:state.jobpost
+    jobpost:state.jobpost,
+    getapply_job:state.getapply_job
 });
 
-export default connect(mapStateToProps, {getsingleJob})(CompanyDashboard)
+export default connect(mapStateToProps, {getsingleJob, getApplication})(CompanyDashboard)

@@ -16,8 +16,9 @@ import StudentDashboard from './component/studentDashboard';
 import PostJob from './component/postJob';
 import ApplyJob from './component/applyJob';
 import PostedJobsView from './component/postedjonView';
-import StudentApplyJob from './component/student_applyJob'
-import Applications from './component/applications'
+import StudentApplyJob from './component/student_applyJob';
+import Applications from './component/applications';
+import ApplicationsView from './component/Applications_view';
 
 
 import setAuthToken from '../../client/src/utils/setAuthToken';
@@ -61,6 +62,7 @@ function App() {
               <Route path="/posted_job_listview/:id" component={PostedJobsView} />
               <Route path="/applied_job_list/:id" component={StudentApplyJob}/>
               <Route path="/application_listview/:id" component={Applications} />
+              <Route path="/application_view/:id" component={ApplicationsView} />
             </Switch>
           </div>
         </Router>

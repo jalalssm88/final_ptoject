@@ -42,6 +42,7 @@ class ApplyJob extends Component {
                     <form className="ui form" id="apply_job" onSubmit={this.submitHandler}>
                         <input type="hidden" value={this.props.match.params.id} name="job_id" />
                         <input type="hidden" value={this.props.auth.user.userId} name="student_id" />
+                        <input type="hidden" value={this.props.location.pathname.split('/')[3]} name="company_id" />
                         <div className="three fields">
                             <div className="field">
                                 <label>Name</label>
@@ -96,8 +97,7 @@ class ApplyJob extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    applyjob: state.getapply_job
-
+    applyjob: state.getapply_job,
 });
 
 export default connect(mapStateToProps, {applyJobpost, getApplyjobStudent})(ApplyJob)

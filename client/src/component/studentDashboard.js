@@ -62,7 +62,7 @@ class StudentDashboard extends Component {
                                                     <h6>Location: <span>{newjob.location}</span></h6>
                                                     <h6>Address: <span>{newjob.address}</span></h6>
                                                     <h6>Visit website: <span>{newjob.website}</span></h6>
-                                                    <Link to={'/apply_job/'+newjob._id} className="ui small green button">Apply now</Link>
+                                                    <Link to={'/apply_job/'+newjob._id+'/'+newjob.company_id} className="ui small green button">Apply now</Link>
                                                 </div>
                                             </div>
                                         ))

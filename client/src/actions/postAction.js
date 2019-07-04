@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {CREATE_JOB, GET_JOBS, JOB_LOADING, GET_JOB, APPLY_JOB, GET_APPLY_JOB_STUDENT} from './types';
+import {CREATE_JOB, GET_JOBS, JOB_LOADING, GET_JOB, APPLY_JOB,
+     GET_APPLY_JOB_STUDENT, GET_APPLICATION_COUNT, GET_APPLICATION_DETAIL} from './types';
 
 //company create new job
 export const createJobpost = (postJobData, history, user_id)=> dispatch =>{
@@ -47,11 +48,20 @@ export const getApplyjobStudent = (student_id) => dispatch =>{
 export const getApplication = (job_id) => dispatch =>{
     dispatch(setPostLoading());
     axios.get('/jobs/get_applications/'+job_id).then(res => 
-        // dispatch({
-        //     type:GET_APPLY_JOB_STUDENT,
-        //     payload:res.data
-        // })
-        console.log('hel')
+        dispatch({
+            type:GET_APPLICATION_COUNT,
+            payload:res.data
+        })
+    )
+}
+
+export const getApplicationDetail = (job_id) => dispatch =>{
+    dispatch(setPostLoading());
+    axios.get('/jobs/get_applications_detail/'+job_id).then(res => 
+        dispatch({
+            type:GET_APPLICATION_DETAIL,
+            payload:res.data
+        })
     )
 }
 
