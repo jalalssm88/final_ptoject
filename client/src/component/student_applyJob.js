@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {applyJobpost, getApplyjobStudent} from '../actions/postAction';
+import DynamicTable from './dynamic_table'
 
 class StudentApplyJob extends Component {
     componentDidMount(){
@@ -21,33 +22,7 @@ class StudentApplyJob extends Component {
                         ( (datas == undefined || datas.length == 0)? <div>No Data found</div>:
                             ( ( datas == null  )?<div className="ui loader active"></div>
                                 :
-                                <table className="ui celled table">
-                                    <thead>
-                                        <tr>
-                                        {
-                                            datas == null?console.log('load'):Object.keys(datas[0]).map((header, index)=>(
-                                                <th key={index}>{header}</th>
-                                            ))                           
-                                        }
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {
-                                            datas.map((item, index)=>(
-                                                <tr key={index}>
-                                                    <td>{item.name}</td>
-                                                    <td>{item.email}</td>
-                                                    <td>{item.experience}</td>
-                                                    <td>{item.company}</td>
-                                                    <td>{item.apply_for}</td>
-
-
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
+                                <DynamicTable data = {datas} />
                             )
                         )
                     }

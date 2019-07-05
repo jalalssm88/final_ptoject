@@ -37,10 +37,6 @@ router.get('/get_jobpost', (req, res, next)=>{
                     location:doc.location,
                     address:doc.address,
                     website:doc.website,
-                    request:{
-                        type:"GET",
-                        url :"http://localhost:5000/get_job/"+doc._id
-                    }
                 }
             })
         }
@@ -61,7 +57,6 @@ router.get('/get_jobpost/:id', (req, res, next)=>{
     }
     Jobpost.find (query) 
     .select('_id company_id name job_title description location address website')
-    // // .populate('jobpost')
     .exec()
     .then(doc => {
         const response ={

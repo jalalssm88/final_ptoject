@@ -1,5 +1,4 @@
 import isEmpty from '../validation/is-empty';
-
 import { GET_APPLY_JOB_STUDENT, JOB_LOADING, GET_APPLICATION_COUNT, GET_APPLICATION_DETAIL } from '../actions/types';
 
 const initialState = {
@@ -10,7 +9,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action){
-    console.log('data in post reducer', action.payload)
   switch(action.type){
         case JOB_LOADING:
             return {
@@ -35,11 +33,9 @@ export default function(state = initialState, action){
                 get_application_detail:action.payload,
                 loading:false,
             }
-
-            
         default:
             return{
                 ...state
             }
-  }
+    }
 }

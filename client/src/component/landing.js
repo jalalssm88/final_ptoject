@@ -6,7 +6,7 @@ class Landing extends Component{
     render(){
         return(
             <div className="ui container fluid" style={{'marginTop':"-20px"}}>
-                <div className="ui grid" style={{"height":"612px", "background":"blue"}}>
+                <div className="ui grid" style={{"height":"612px", "background":"#1f0c0c"}}>
                     <div className="ui container">
                         <div className="ui grid">
                             <div className="eight wide column">

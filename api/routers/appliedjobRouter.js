@@ -19,9 +19,7 @@ const upload = multer({
     }
 });
 
-
 const AppliedJob = require('../models/appliedjobModel');
-
 router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
@@ -35,7 +33,6 @@ router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
         file_cv:req.file.path,
         skills:req.body.skills
     })
-    console
     new_applyJob.save()
     .then(posts => {
         res.status(201).json({
@@ -50,39 +47,9 @@ router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     })
 });
 
-// router.get('/get_applied_job', (req, res, next)=>{
-//     AppliedJob.find()
-//     .select('_id job_id student_id name email contact qualification experience file_cv skills')
-//     .exec()
-//     .then(docs=>{
-//         const response = {
-//             count:docs.length,
-//             data:docs.map(doc =>{
-//                 return {
-//                     _id:doc._id,
-//                     job_id:doc.job_id,
-//                     student_id:doc.student_id,
-//                     name:doc.name,
-//                     email:doc.email,
-//                     contact:doc.contact,
-//                     qualification:doc.qualification,
-//                     experience:doc.experience,
-//                     file_cv:doc.file_cv,
-//                     skills:doc.skills,
-//                 }
-//             })
-//         }
-//         res.status(200).json(response)
-//     })
-//     .catch(err=>{
-//         res.status(500).json({
-//             error:err
-//         })
-//     })
-// });
-
 router.get('/apply_jobpost/:id', (req, res, next)=>{
     const id = req.params.id;
+    console.log('getting students of =====  ', id)
     var query ={
         "student_id":id
     }
@@ -119,16 +86,14 @@ router.get('/apply_jobpost/:id', (req, res, next)=>{
 
 router.get('/get_applications/:id', (req, res, next)=>{
     const id = req.params.id;
-    console.log('id=======', id)
+    console.log('getting =====', id)
     var query ={
         "company_id":id
     }
     AppliedJob.find (query) 
-    // .populate('job_id')
     .select('_id job_id student_id company_id name email contact qualification experience file_cv skills')
     .exec()
     .then(doc => {
-        console.log('docc====of application', doc)
         const response = {
             counts : doc.length,
             data:doc.map(item=>{
@@ -157,16 +122,14 @@ router.get('/get_applications/:id', (req, res, next)=>{
 
 router.get('/get_applications_detail/:id', (req, res, next)=>{
     const id = req.params.id;
-    console.log('id=======', id)
+    console.log('gettng ====', id)
     var query ={
         "job_id":id
     }
     AppliedJob.find (query) 
-    // .populate('job_id')
     .select('_id job_id student_id company_id name email contact qualification experience file_cv skills')
     .exec()
     .then(doc => {
-        console.log('docc====of application', doc)
         const response = {
             counts : doc.length,
             data:doc.map(item=>{
@@ -195,7 +158,5 @@ router.get('/get_applications_detail/:id', (req, res, next)=>{
         })
     })
 });
-
-
 
 module.exports = router;
