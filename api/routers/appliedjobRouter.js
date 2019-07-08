@@ -92,18 +92,43 @@ router.get('/get_applications/:id', (req, res, next)=>{
     }
     AppliedJob.find (query) 
     .select('_id job_id student_id company_id name email contact qualification experience file_cv skills')
+    .populate('job_id','job_title')
     .exec()
     .then(doc => {
-        const response = {
-            counts : doc.length,
-            data:doc.map(item=>{
-                return{
-                    company_id:item.company_id,
-                    job_id: item.job_id,
-                    student_id:item.student_id,
-                }
+        
+        // console.log('doc', doc)
+        var final_resp = {}
+        var response = {}
+        final_resp["count"] = doc.length;
+        var my_array = []
+        var count_dict = {}
+        doc.map(obj => {
+            if(!response.hasOwnProperty(obj.job_id._id)) {	
+                response[obj.job_id._id] = []
+            } 
+            response[obj.job_id._id].push(obj.job_id.job_title)
+        })
+
+        my_array.push(response);
+        var count_array = []
+        Object.keys(response).map(items=>{
+            my_array.map(item=>{
+                count_dict[items] = item[items].length
             })
-        }
+        })
+        Object.keys(response).map(items=>{
+            console.log('items', items)
+            my_array.map(item=>{
+                console.log('item', item)
+                count_dict["name"] = item[items]
+            })
+        })
+
+
+        console.log('count dict', count_dict)
+
+
+
         if(doc){
             res.status(200).json(response)
         }else{

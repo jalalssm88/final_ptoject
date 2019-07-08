@@ -5,7 +5,7 @@ import {getsingleJob, getApplication} from '../actions/postAction';
 
 class CompanyDashboard extends Component {
     componentDidMount(){
-        this.props.getsingleJob(this.props.auth.user.userId)
+        // this.props.getsingleJob(this.props.auth.user.userId)
         this.props.getApplication(this.props.auth.user.userId)
     }
 
