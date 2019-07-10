@@ -5,7 +5,7 @@ import {getsingleJob, getApplication} from '../actions/postAction';
 
 class CompanyDashboard extends Component {
     componentDidMount(){
-        // this.props.getsingleJob(this.props.auth.user.userId)
+        this.props.getsingleJob(this.props.auth.user.userId)
         this.props.getApplication(this.props.auth.user.userId)
     }
 
@@ -13,7 +13,6 @@ class CompanyDashboard extends Component {
         const { user } = this.props.auth;
         const {count} = this.props.jobpost.job;
         const {counts} = this.props.getapply_job.get_application_count
-
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">

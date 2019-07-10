@@ -7,6 +7,12 @@ class DynamicTable extends Component{
     render(){
         console.log('props in dynamic js', this.props)
         const {data} =this.props;
+        const {button} = this.props;
+        var button_status;
+        if(button !== undefined){
+            button_status = button.split('.')[1];
+        }
+        
         return(
             <React.Fragment>{
                 ((data.length === 0)?<div>No Data Found</div>:
@@ -36,6 +42,11 @@ class DynamicTable extends Component{
                                                 )
                                             })
                                         }
+                                        {
+                                            button == undefined || button.length === 0?'':
+                                            <th>{button_status}</th>
+                                            
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,8 +70,16 @@ class DynamicTable extends Component{
                                                             </td>
                                                             : ''
                                                             )
+
                                                         )
                                                     })
+                                                    
+                                                }
+                                                {
+                                                   button_status == null ?'':
+                                                    <td>
+                                                        <Link to={'/'} className="ui green button mini">view</Link>
+                                                    </td>
                                                 }
                                             </tr>
                                         })

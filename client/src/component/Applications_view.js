@@ -21,7 +21,7 @@ class ApplicationsView extends Component {
                     {
                         (data=== undefined || data ===null)?
                         <div className="ui active loader"></div>:
-                        <DynamicTable data={data} count={counts} message={message} loader={loading}/>
+                        <DynamicTable data={data} count={counts} message={message} button={'button.view'}/>
                     }
                 </div>
             </div>

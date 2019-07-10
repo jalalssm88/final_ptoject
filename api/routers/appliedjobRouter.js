@@ -96,12 +96,10 @@ router.get('/get_applications/:id', (req, res, next)=>{
     .exec()
     .then(doc => {
         
-        // console.log('doc', doc)
-        var final_resp = {}
+        final_response = {}
         var response = {}
-        final_resp["count"] = doc.length;
         var my_array = []
-        var count_dict = {}
+        var count_dict = []
         doc.map(obj => {
             if(!response.hasOwnProperty(obj.job_id._id)) {	
                 response[obj.job_id._id] = []
@@ -110,27 +108,26 @@ router.get('/get_applications/:id', (req, res, next)=>{
         })
 
         my_array.push(response);
-        var count_array = []
         Object.keys(response).map(items=>{
             my_array.map(item=>{
-                count_dict[items] = item[items].length
+                // if(!count_dict.hasOwnProperty(item[items])){
+                //     count_dict[items] = []
+                // }
+                // count_dict[items].push({"count":item[items].length, "name":item[items][0]})
+                // count_dict["name"] = item[items][0]
+                // count_dict["id"] = items
+                // count_dict["count"]=item[items].length
+                count_dict.push({"count":item[items].length, "name":item[items][0], "id":items})
             })
         })
-        Object.keys(response).map(items=>{
-            console.log('items', items)
-            my_array.map(item=>{
-                console.log('item', item)
-                count_dict["name"] = item[items]
-            })
-        })
 
-
-        console.log('count dict', count_dict)
-
-
+        final_response["counts"] = doc.length;
+        final_response["data"] = count_dict;
+        console.log('final_response', final_response)
+       
 
         if(doc){
-            res.status(200).json(response)
+            res.status(200).json(final_response)
         }else{
             res.status(404).json({
                 message: "no data found against this id",
@@ -165,10 +162,14 @@ router.get('/get_applications_detail/:id', (req, res, next)=>{
                     qualification:item.qualification,
                     experience:item.experience,
                     skills:item.skills,
-                    file_cv:item.file_cv
+                    file_cv:item.file_cv,
+                    action:item._id.btn
                 }
             })
         }
+
+        response.data['action'] = 'view.btn'
+       
         if(doc){
             res.status(200).json(response)
         }else{
