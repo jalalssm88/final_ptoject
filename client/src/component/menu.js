@@ -24,9 +24,11 @@ class Menu extends Component {
                             <Link to="/company_dashboard" className="ui labeled icon button"><i className="icon home"></i>Home</Link>
                         </div>
                     }
-                    
                     <div className="item">
                         <h3 style={{"color":"#e6f8d3"}}>{user.userName}</h3>
+                    </div>
+                    <div className="item">
+                        <Link to={'/profile/'+user.userId} style={{"color":"#e6f8d3"}}>view profile</Link>
                     </div>
                     <div className="item right floated">
                         <Link  className="ui green button small" onClick={this.onLogoutClick.bind(this)} to="/login">{' '}log out</Link>

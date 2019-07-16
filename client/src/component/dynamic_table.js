@@ -77,9 +77,23 @@ class DynamicTable extends Component{
                                                 }
                                                 {
                                                    button_status == null ?'':
+                                                   ((button_status == 'view')?
                                                     <td>
                                                         <Link to={'/'} className="ui green button mini">view</Link>
-                                                    </td>
+                                                    </td>:
+                                                    ''
+                                                   )
+                                                    
+                                                }
+                                                 {
+                                                   button_status == null ?'':
+                                                   ((button_status == 'delete')?
+                                                    <td>
+                                                        <Link to={'/'} className="ui red button mini">delete</Link>
+                                                    </td>:
+                                                    ''
+                                                   )
+                                                    
                                                 }
                                             </tr>
                                         })
