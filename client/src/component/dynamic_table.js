@@ -60,7 +60,7 @@ class DynamicTable extends Component{
                                                             ( (col_key.split('_')[1] != 'id')
                                                             ? <td key={index}>
                                                                     {
-                                                                        ( ( dataList.indexOf('xlsx') != -1 || dataList.indexOf('doc') != -1  )
+                                                                        ( ( dataList.indexOf('xlsx') != -1 || dataList.indexOf('doc') != -1 || dataList.indexOf('docx') != -1  )
                                                                             ?
                                                                                 <Link to={'/download_cv/'+row['_id']} className="ui mini orange button" src={row[col_key]} alt="image">Download CV</Link>
                                                                             :

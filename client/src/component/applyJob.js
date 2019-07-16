@@ -39,6 +39,7 @@ class ApplyJob extends Component {
                     <h2>Apply For Job</h2>
                 </div>
                 <div className="sixteen wide column">
+                    <div className="ui segment">
                     <form className="ui form" id="apply_job" onSubmit={this.submitHandler}>
                         <input type="hidden" value={this.props.match.params.id} name="job_id" />
                         <input type="hidden" value={this.props.auth.user.userId} name="student_id" />
@@ -89,6 +90,7 @@ class ApplyJob extends Component {
                             <button className="ui small blue labeled icon button"><i className="right arrow icon"></i> submit</button>
                         </div>
                     </form>
+                    </div>
                </div>
             </div>
         )

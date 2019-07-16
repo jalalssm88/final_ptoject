@@ -20,18 +20,27 @@ class StudentDashboard extends Component {
                     <div className="ui active loader"></div>:
                         <React.Fragment>
                             <div className="sixteen wide column">
-                                <div className="ui stackable two column centered grid">
+                                <div className="ui stackable two column stretched grid">
                                     {
                                         jobs.map(newjob=>(
                                             <div className="column" key={newjob._id}>
                                                 <div className="ui segment">
-                                                    <h3>{newjob.name}</h3>
-                                                    <h5>{newjob.job_title}</h5>
-                                                    <p>{newjob.description}</p>
-                                                    <h6>Location: <span>{newjob.location}</span></h6>
-                                                    <h6>Address: <span>{newjob.address}</span></h6>
-                                                    <h6>Visit website: <span>{newjob.website}</span></h6>
-                                                    <Link to={'/apply_job/'+newjob._id+'/'+newjob.company_id} className="ui small green button">Apply now</Link>
+                                                    <div className="ui grid">
+                                                        <div className="eleven wide column">
+                                                            <span style={{'fontWeight':"bold","fontSize":"20px"}}>Job Title: <span style={{"fontWeight":"lighter"}}>{newjob.job_title}</span></span>
+                                                            <p style={{"fontWeight":"bold", "marginBottom":"3px"}}>Company: <span style={{"fontWeight":"lighter"}}>{newjob.name}</span></p>
+                                                            <p>{newjob.description}</p>
+                                                            <div className="ui divider"></div>
+                                                            <address>Address: <span>{newjob.address}</span></address>
+                                                        </div>
+                                                        <div className="five wide column" style={{"borderLeft":"1px solid #ccb7b7", "textAlign":"center"}}>
+                                                            <h5 style={{"marginBottom":"0px"}}>location <label className="ui gray label">{newjob.location}</label></h5>
+                                                            <label>Visit : <Link>{newjob.website}</Link></label>
+                                                            <div>
+                                                                <Link style={{'marginTop':"34px"}} to={'/apply_job/'+newjob._id+'/'+newjob.company_id} className="ui mini green button">Apply now</Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))
