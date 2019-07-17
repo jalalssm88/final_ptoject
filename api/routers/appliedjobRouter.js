@@ -20,6 +20,7 @@ const upload = multer({
 });
 
 const AppliedJob = require('../models/appliedjobModel');
+const RejectedJob = require('../models/rejectedjobModel');
 router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
@@ -157,6 +158,7 @@ router.get('/get_applications_detail/:id', (req, res, next)=>{
             data:doc.map(item=>{
                 return{
                     _id:item._id,
+                    student_id:item.student_id,
                     name:item.name,
                     email:item.email,
                     qualification:item.qualification,
@@ -170,6 +172,60 @@ router.get('/get_applications_detail/:id', (req, res, next)=>{
 
         response.data['action'] = 'view.btn'
        
+        if(doc){
+            res.status(200).json(response)
+        }else{
+            res.status(404).json({
+                message: "no data found against this id",
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+});
+
+router.post('/rejected_job', (req, res, next)=>{
+    const new_rejected_job = new RejectedJob({
+        job_id:req.body.job_id,
+        student_id:req.body.student_id,
+    })
+    new_rejected_job.save()
+    .then(job => {
+        res.status(201).json({
+            status:"success",
+            message: 'product successfully save to database',
+        });
+    })
+    .catch(err => {
+       res.status(500).json({
+           error:err
+       })
+    })
+});
+
+router.get('/rejected_job/:id', (req, res, next)=>{
+    const id = req.params.id;
+    console.log('gettng ====', id)
+    var query ={
+        "student_id":id
+    }
+    RejectedJob.find (query) 
+    .select('_id job_id student_id')
+    .exec()
+    .then(doc => {
+        const response = {
+            counts : doc.length,
+            data:doc.map(item=>{
+                return{
+                    _id:item._id,
+                    job_id:item.job_id,
+                    student_id:item.student_id,
+                }
+            })
+        }
         if(doc){
             res.status(200).json(response)
         }else{

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {CREATE_JOB, GET_JOBS, JOB_LOADING, GET_JOB, APPLY_JOB,
-     GET_APPLY_JOB_STUDENT, GET_APPLICATION_COUNT, GET_APPLICATION_DETAIL} from './types';
+     GET_APPLY_JOB_STUDENT, GET_APPLICATION_COUNT, GET_APPLICATION_DETAIL,
+     CREATE_REJECT_JOB, GET_REJECT_JOB
+    } from './types';
 
 //company create new job
 export const createJobpost = (postJobData, history, user_id)=> dispatch =>{
@@ -64,6 +66,29 @@ export const getApplicationDetail = (job_id) => dispatch =>{
         })
     )
 }
+
+export const createRejectJob = (rejected_data) => dispatch =>{
+    dispatch(setPostLoading());
+    axios.post('/jobs/rejected_job/', rejected_data).then(res => 
+        dispatch({
+            type:CREATE_REJECT_JOB,
+            payload:res.data
+        })
+    )
+}
+
+export const getRejectedJob = (student_id) => dispatch =>{
+    dispatch(setPostLoading());
+    axios.get('/jobs/get_applications_detail/'+student_id).then(res => 
+        dispatch({
+            type:GET_REJECT_JOB,
+            payload:res.data
+        })
+    )
+}
+
+
+
 
 export const setPostLoading = () => {
     return {

@@ -70,10 +70,8 @@ class DynamicTable extends Component{
                                                             </td>
                                                             : ''
                                                             )
-
                                                         )
                                                     })
-                                                    
                                                 }
                                                 {
                                                    button_status == null ?'':
@@ -83,7 +81,6 @@ class DynamicTable extends Component{
                                                     </td>:
                                                     ''
                                                    )
-                                                    
                                                 }
                                                  {
                                                    button_status == null ?'':
@@ -93,7 +90,6 @@ class DynamicTable extends Component{
                                                     </td>:
                                                     ''
                                                    )
-                                                    
                                                 }
                                             </tr>
                                         })
