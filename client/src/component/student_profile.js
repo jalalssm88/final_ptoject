@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { getApplyjobStudent} from '../actions/postAction';
+import { getApplyjobStudent, getRejectedJob} from '../actions/postAction';
 
 
 
@@ -9,10 +9,15 @@ class StudentProfile extends Component {
     componentDidMount(){
         const { user } = this.props.auth;
         this.props.getApplyjobStudent(this.props.auth.user.userId);
+        this.props.getRejectedJob(this.props.auth.user.userId);
+
     }
     render() {
         const { user } = this.props.auth;
         const {count} = this.props.applyjob.apply_student_job;
+        const {reject_counts} = this.props.applyjob.get_rejected_job;
+        console.log('props', this.props)
+        
         return (
             <div className="ui grid">
                 <div className="twelve wide column">
@@ -38,7 +43,7 @@ class StudentProfile extends Component {
                         </div>
                         <div className="column">
                             <div className="ui segment counts_segment">
-                                <h4>5</h4>
+                                <h4>{reject_counts}</h4>
                                 <p>No of Job Rejected</p>
                                 <Link to={`/posted_job_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
@@ -55,4 +60,4 @@ const mapStateToProps = state => ({
     application_detail:state.getapply_job,
     applyjob: state.getapply_job
 });
-export default connect(mapStateToProps, { getApplyjobStudent })(StudentProfile)
+export default connect(mapStateToProps, { getApplyjobStudent, getRejectedJob })(StudentProfile)

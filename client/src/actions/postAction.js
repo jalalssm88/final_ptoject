@@ -79,7 +79,7 @@ export const createRejectJob = (rejected_data) => dispatch =>{
 
 export const getRejectedJob = (student_id) => dispatch =>{
     dispatch(setPostLoading());
-    axios.get('/jobs/get_applications_detail/'+student_id).then(res => 
+    axios.get('/jobs/rejected_job/'+student_id).then(res => 
         dispatch({
             type:GET_REJECT_JOB,
             payload:res.data

@@ -214,10 +214,12 @@ router.get('/rejected_job/:id', (req, res, next)=>{
     }
     RejectedJob.find (query) 
     .select('_id job_id student_id')
+    .populate('job_id','name')
     .exec()
     .then(doc => {
+        console.log('doc', doc)
         const response = {
-            counts : doc.length,
+            reject_counts : doc.length,
             data:doc.map(item=>{
                 return{
                     _id:item._id,
