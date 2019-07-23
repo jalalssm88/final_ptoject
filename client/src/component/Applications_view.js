@@ -20,6 +20,7 @@ class ApplicationsView extends Component {
      const {data, counts} = this.props.application_detail.get_application_detail
      var message = "Total Application for this job is :"
      const {loading} = this.props.jobpost
+     console.log('this propsssss=======', this.props.application_detail.get_application_detail)
         return (
             <div className="ui grid">
                 <div className="sixteen wide column">
@@ -61,7 +62,7 @@ class ApplicationsView extends Component {
                                                                 {
                                                                     ( ( dataList.indexOf('xlsx') != -1 || dataList.indexOf('doc') != -1 || dataList.indexOf('docx') != -1  )
                                                                         ?
-                                                                            <Link to={'/download_cv/'+row['_id']} className="ui mini orange button" src={row[col_key]} alt="image">Download CV</Link>
+                                                                            <Link to={row[col_key]} className="ui mini orange button" src={row[col_key]} alt="image">Download CV</Link>
                                                                         :
                                                                             row[col_key]
                                                                     )
@@ -73,10 +74,11 @@ class ApplicationsView extends Component {
                                                 })
                                             }
                                             <td>
-                                                <Link onClick={this.shortlist.bind(this,{job_id:row['_id'], student_id:row['student_id']})} className="ui green icon button mini"><i className="icon check"></i></Link>
+                                               
+                                                <Link onClick={this.shortlist.bind(this,{reject_job_id:row['_id'], student_id:row['student_id']})} className="ui green icon button mini"><i className="icon check"></i></Link>
                                             </td>
                                             <td>
-                                                <Link onClick={this.reject.bind(this,{job_id:row['_id'], student_id:row['student_id']})} className="ui red icon button mini"><i className="icon close"></i></Link>
+                                                <Link onClick={this.reject.bind(this,{reject_job_id:row['_id'], student_id:row['student_id'], job_id:this.props.match.params.id})} className="ui red icon button mini"><i className="icon close"></i></Link>
                                             </td>
                                             
                                         </tr>

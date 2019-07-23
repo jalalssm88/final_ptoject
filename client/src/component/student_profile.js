@@ -45,7 +45,7 @@ class StudentProfile extends Component {
                             <div className="ui segment counts_segment">
                                 <h4>{reject_counts}</h4>
                                 <p>No of Job Rejected</p>
-                                <Link to={`/posted_job_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
+                                <Link to={`/student_rejected_job/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
                         </div>
                     </div>

@@ -189,8 +189,9 @@ router.get('/get_applications_detail/:id', (req, res, next)=>{
 
 router.post('/rejected_job', (req, res, next)=>{
     const new_rejected_job = new RejectedJob({
-        job_id:req.body.job_id,
+        reject_job_id:req.body.reject_job_id,
         student_id:req.body.student_id,
+        job_id:req.body.job_id
     })
     new_rejected_job.save()
     .then(job => {
@@ -213,8 +214,8 @@ router.get('/rejected_job/:id', (req, res, next)=>{
         "student_id":id
     }
     RejectedJob.find (query) 
-    .select('_id job_id student_id')
-    .populate('job_id','name')
+    .select('_id reject_job_id student_id')
+    .populate('job_id','name job_title')
     .exec()
     .then(doc => {
         console.log('doc', doc)
@@ -223,8 +224,10 @@ router.get('/rejected_job/:id', (req, res, next)=>{
             data:doc.map(item=>{
                 return{
                     _id:item._id,
-                    job_id:item.job_id,
+                    reject_job_id:item.reject_job_id,
                     student_id:item.student_id,
+                    company_name:item.job_id.name,
+                    job_title:item.job_id.job_title
                 }
             })
         }
