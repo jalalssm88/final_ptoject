@@ -46,7 +46,6 @@ class ApplicationsView extends Component {
                                     }
                                     <th>Short List</th>
                                     <th>Reject</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,14 +72,21 @@ class ApplicationsView extends Component {
                                                     )
                                                 })
                                             }
-                                            <td>
-                                               
-                                                <Link onClick={this.shortlist.bind(this,{reject_job_id:row['_id'], student_id:row['student_id']})} className="ui green icon button mini"><i className="icon check"></i></Link>
-                                            </td>
-                                            <td>
-                                                <Link onClick={this.reject.bind(this,{reject_job_id:row['_id'], student_id:row['student_id'], job_id:this.props.match.params.id})} className="ui red icon button mini"><i className="icon close"></i></Link>
-                                            </td>
-                                            
+                                            {
+                                                row['status'] == 'rejected' || row['status'] == 'shortlisted'?
+                                                <React.Fragment>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </React.Fragment>
+                                                :<React.Fragment>
+                                                    <td>
+                                                        <Link onClick={this.reject.bind(this,{reject_job_id:row['_id'], action:'shortlisted'})} className="ui green icon button mini"><i className="icon check"></i></Link>
+                                                    </td>
+                                                    <td>
+                                                        <Link onClick={this.reject.bind(this,{reject_job_id:row['_id'], action:'rejected'})} className="ui red icon button mini"><i className="icon close"></i></Link>
+                                                    </td>
+                                                </React.Fragment>
+                                            }
                                         </tr>
                                     })
                                 }

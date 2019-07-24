@@ -20,7 +20,8 @@ import StudentApplyJob from './component/student_applyJob';
 import Applications from './component/applications';
 import ApplicationsView from './component/Applications_view';
 import StudentProfile from './component/student_profile';
-import StudentRejectedJob from './component/studentRejected_job'
+import StudentRejectedJob from './component/studentRejected_job';
+import StudentShortlistedJob from './component/studentShortlisted_job';
 
 
 import setAuthToken from '../../client/src/utils/setAuthToken';
@@ -67,6 +68,7 @@ function App() {
               <Route path="/application_view/:id" component={ApplicationsView} />
               <Route path="/profile/:id" component={StudentProfile} />
               <Route path="/student_rejected_job/:id" component={StudentRejectedJob} />
+              <Route path="/student_shortlisted_job/:id" component={StudentShortlistedJob} />
             </Switch>
           </div>
         </Router>

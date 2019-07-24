@@ -31,6 +31,10 @@ const AppliedjobSchema = new Schema({
     },
     skills:{
         type:String
+    },
+    status:{
+        type:String,
+        default:'pending'
     }
 });
 

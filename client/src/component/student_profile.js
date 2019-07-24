@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { getApplyjobStudent, getRejectedJob} from '../actions/postAction';
+import { getApplyjobStudent, getRejectedJob, getShortlistedJob} from '../actions/postAction';
 
 
 
@@ -10,14 +10,15 @@ class StudentProfile extends Component {
         const { user } = this.props.auth;
         this.props.getApplyjobStudent(this.props.auth.user.userId);
         this.props.getRejectedJob(this.props.auth.user.userId);
+        this.props.getShortlistedJob(this.props.auth.user.userId)
 
     }
     render() {
         const { user } = this.props.auth;
         const {count} = this.props.applyjob.apply_student_job;
         const {reject_counts} = this.props.applyjob.get_rejected_job;
+        const {shortlist_counts} = this.props.applyjob.get_shortlisted_job
         console.log('props', this.props)
-        
         return (
             <div className="ui grid">
                 <div className="twelve wide column">
@@ -30,21 +31,21 @@ class StudentProfile extends Component {
                         <div className="column">
                             <div className="ui segment counts_segment">
                                 <h4>{count}</h4>
-                                <p>No of Job Applied</p>
+                                <p>Total Jobs Applied</p>
                                 <Link to={`/applied_job_list/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
                         </div>
                         <div className="column">
                             <div className="ui segment counts_segment">
-                                <h4>5</h4>
-                                <p>No of Job Aproved</p>
-                                <Link to={`/posted_job_listview/${user.userId}`} className="ui mini blue button">view all</Link> 
+                                <h4>{shortlist_counts}</h4>
+                                <p>Shortlisted Jobs</p>
+                                <Link to={`/student_shortlisted_job/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
                         </div>
                         <div className="column">
                             <div className="ui segment counts_segment">
                                 <h4>{reject_counts}</h4>
-                                <p>No of Job Rejected</p>
+                                <p>Rejected Jobs</p>
                                 <Link to={`/student_rejected_job/${user.userId}`} className="ui mini blue button">view all</Link> 
                             </div>
                         </div>
@@ -60,4 +61,4 @@ const mapStateToProps = state => ({
     application_detail:state.getapply_job,
     applyjob: state.getapply_job
 });
-export default connect(mapStateToProps, { getApplyjobStudent, getRejectedJob })(StudentProfile)
+export default connect(mapStateToProps, { getApplyjobStudent, getRejectedJob, getShortlistedJob })(StudentProfile)
