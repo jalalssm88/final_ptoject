@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ADD_SUMMARY, GET_SUMMARY, ADD_EXPERIENCE, GET_EXPERIENCE,
-     ADD_EDUCATION, GET_EDUCATION, JOB_LOADING} from './types';
+     ADD_EDUCATION, GET_EDUCATION, PROFILE_LOADING} from './types';
 
 
 export const addSummary = (summary_data)=> dispatch =>{
@@ -53,7 +53,7 @@ export const getEducation = (user_id)=> dispatch =>{
 
 export const setPostLoading = () => {
     return {
-      type: JOB_LOADING
+      type: PROFILE_LOADING
     };
 };
 

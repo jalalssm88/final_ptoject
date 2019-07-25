@@ -25,11 +25,12 @@ router.post('/add_summary', (req, res, next)=>{
 });
 
 router.get('/get_summary/:id', (req, res, next)=>{
+
     const id = req.params.id;
     var query ={
         "user":id
     }
-    Jobpost.find (query) 
+    ProfileSummary.find (query) 
     .select('_id user summary')
     .exec()
     .then(doc => {

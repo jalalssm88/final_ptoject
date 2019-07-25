@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom';
 import { getApplyjobStudent, getRejectedJob, getShortlistedJob} from '../actions/postAction';
 import {addSummary, getSummary, addExperience, getExperience, addEducation, getEducation} from '../actions/profileAction';
 
-
-
 class StudentProfile extends Component {
     constructor(props){
         super(props);
@@ -13,13 +11,21 @@ class StudentProfile extends Component {
             summary_show:false,
             experience_show:false,
             education_show:false,
+
             summary:'',
+
             job_name:'',
             company_name:'',
             country_name:'',
             city_name:'',
             from_date:'',
-            to_date:''
+            to_date:'',
+
+            degree_title:'',
+            study_field:'',
+            edu_country:'',
+            edu_city:'',
+            completion_year:''
 
         }
     }
@@ -28,6 +34,9 @@ class StudentProfile extends Component {
         this.props.getApplyjobStudent(this.props.auth.user.userId);
         this.props.getRejectedJob(this.props.auth.user.userId);
         this.props.getShortlistedJob(this.props.auth.user.userId)
+
+        this.props.getSummary(this.props.auth.user.userId);
+
 
     }
 
@@ -78,8 +87,9 @@ class StudentProfile extends Component {
         var submit_dict = {}
         submit_dict['summary'] = this.state.summary
         submit_dict['user'] = this.props.auth.user.userId
-        this.props.createProfile(submit_dict);
+        this.props.addSummary(submit_dict);
     }
+
     submitExperience = (e)=>{
         e.preventDefault();
         var submit_dict2 = {}
@@ -89,10 +99,18 @@ class StudentProfile extends Component {
         submit_dict2['city_name'] = this.state.city_name
         submit_dict2['from_date'] = this.state.from_date
         submit_dict2['to_date'] = this.state.to_date
+        this.props.addExperience(submit_dict2)
+    }
 
-        this.props.createProfile(submit_dict2)
-
-
+    submitEducation = (e)=>{
+        e.preventDefault();
+        var submit_dict3 = {}
+        submit_dict3['degree_title'] = this.state.degree_title
+        submit_dict3['study_field'] = this.state.study_field
+        submit_dict3['edu_country'] = this.state.edu_country
+        submit_dict3['edu_city'] = this.state.edu_city
+        submit_dict3['completion_year'] = this.state.completion_year
+        this.props.addExperience(submit_dict3)
     }
 
     render() {
@@ -100,6 +118,7 @@ class StudentProfile extends Component {
         const {count} = this.props.applyjob.apply_student_job;
         const {reject_counts} = this.props.applyjob.get_rejected_job;
         const {shortlist_counts} = this.props.applyjob.get_shortlisted_job
+        const {data} = this.props.getProfile.summary
         console.log('props', this.props)
         
         return (
@@ -127,21 +146,12 @@ class StudentProfile extends Component {
                                     </div>
                                     <div className="summary_result">
                                         <h3>Summary</h3>
-                                        <p>I am Front end Web and Application developer, building websites
-                                            and applications with Html, Css and java Script . With my creative
-                                            technical skill i can design and develop user-friendly and responsive 
-                                            sites as well as writing clean and efficient code to make the program
-                                            best performance. i always trying to write generic scripts and function
-                                            that can save time and improve code readability. 
-                                            One year of professional experience as a front end Web and Application 
-                                            developer i learnt to work on JavaScript's libraries like Jquery, react-js
-                                            and other plugins.
-                                        </p>
+                                        <p>{data !== undefined || data != null? data[0].summary:''}</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="one wide column">
-                                <Link onClick={this.show_summary} className="ui mini icon button"><i className="plus icon"></i></Link>
+                                <Link style={data == undefined || data == null? {display:'block'}:{display:'none'}} onClick={this.show_summary} className="ui mini icon button"><i className="plus icon"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -280,6 +290,7 @@ class StudentProfile extends Component {
 const mapStateToProps = state => ({
     auth: state.auth,
     application_detail:state.getapply_job,
-    applyjob: state.getapply_job
+    applyjob: state.getapply_job,
+    getProfile: state.profile
 });
 export default connect(mapStateToProps, { getApplyjobStudent, getRejectedJob, getShortlistedJob, addSummary, getSummary, addExperience, getExperience, addEducation, getEducation })(StudentProfile)
