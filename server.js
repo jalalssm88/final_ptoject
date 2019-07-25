@@ -7,6 +7,7 @@ const app = express();
 const User = require('./api/routers/userRouter');
 const Jobpost = require('./api/routers/jobpostRouter');
 const Appliedjob = require('./api/routers/appliedjobRouter');
+const UserProfile = require('./api/routers/userProfileRouter');
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,7 +28,7 @@ mongoose.connect('mongodb+srv://jalal:jalal4488@mongo-learn-q9bs4.mongodb.net/te
 app.use('/user', User);
 app.use('/jobs', Jobpost);
 app.use('/jobs', Appliedjob);
-
+app.use('/profile', UserProfile);
 
 
 app.use((req, res, next)=> {

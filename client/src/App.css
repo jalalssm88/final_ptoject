@@ -80,3 +80,19 @@
   font-size: 20px;
   margin-bottom: 0px;
 }
+
+
+/* student profile style */
+.summary_result h3{
+  margin-bottom: 6px;
+}
+
+.experience_result h3{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.education_output h3, .education_output h4{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

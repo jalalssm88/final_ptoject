@@ -20,7 +20,6 @@ const upload = multer({
 });
 
 const AppliedJob = require('../models/appliedjobModel');
-const RejectedJob = require('../models/rejectedjobModel');
 router.post('/apply_jobpost', upload.single('file_cv'), (req, res, next)=>{
     const new_applyJob = new AppliedJob({
         job_id:req.body.job_id,
