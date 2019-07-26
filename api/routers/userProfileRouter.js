@@ -7,14 +7,15 @@ const ProfileEducation = require('../models/profileEducationModel');
 
 //profile summary
 router.post('/add_summary', (req, res, next)=>{
-    console.log('req body in user profile', req.body)
     const new_summary = new ProfileSummary(
         req.body
     )
     new_summary.save()
     .then(profile => {
+        var my_arr= []
+        my_arr.push(profile)
         res.status(201).json({
-            message: 'profile created',
+           data:my_arr
         });
     })
     .catch(err => {
@@ -25,7 +26,6 @@ router.post('/add_summary', (req, res, next)=>{
 });
 
 router.get('/get_summary/:id', (req, res, next)=>{
-
     const id = req.params.id;
     var query ={
         "user":id
@@ -34,17 +34,8 @@ router.get('/get_summary/:id', (req, res, next)=>{
     .select('_id user summary')
     .exec()
     .then(doc => {
-        const response ={
-            data:doc.map(doc=>{
-                return{
-                    _id:doc._id,
-                    user:doc.user,
-                    summary:doc.summary,
-                }
-            })
-        }
         if(doc){
-            res.status(200).json(response)
+            res.status(200).json({data:doc})
         }else{
             res.status(404).json({
                 message: "no data found against this id",
@@ -61,15 +52,13 @@ router.get('/get_summary/:id', (req, res, next)=>{
 
 //profile experience
 router.post('/add_experience', (req, res, next)=>{
-    console.log('req body in user profile', req.body)
     const new_experience = new ProfileExperience(
         req.body
     )
     new_experience.save()
     .then(profile => {
-        res.status(201).json({
-            message: 'profile created',
-        });
+       
+        res.status(201).json(profile);
     })
     .catch(err => {
        res.status(500).json({
@@ -83,25 +72,13 @@ router.get('/get_experience/:id', (req, res, next)=>{
     var query ={
         "user":id
     }
-    Jobpost.find (query) 
-    .select('_id user job_name country_name city_name from_date to_date')
+    ProfileExperience.find (query) 
+    .select('_id user job_name company_name country_name city_name from_date to_date')
     .exec()
     .then(doc => {
-        const response ={
-            data:doc.map(doc=>{
-                return{
-                    _id:doc._id,
-                    user:doc.user,
-                    job_name:doc.job_name,
-                    country_name:doc.country_name,
-                    city_name:doc.city_name,
-                    from_date:doc.from_date,
-                    to_date:doc.to_date
-                }
-            })
-        }
+        
         if(doc){
-            res.status(200).json(response)
+            res.status(200).json(doc)
         }else{
             res.status(404).json({
                 message: "no data found against this id",
@@ -123,9 +100,7 @@ router.post('/add_education', (req, res, next)=>{
     )
     new_education.save()
     .then(profile => {
-        res.status(201).json({
-            message: 'profile created',
-        });
+        res.status(201).json(profile);
     })
     .catch(err => {
        res.status(500).json({
@@ -139,25 +114,12 @@ router.get('/get_education/:id', (req, res, next)=>{
     var query ={
         "user":id
     }
-    Jobpost.find (query) 
-    .select('_id user degree_title study_field edu_country edu_city completion_year')
+    ProfileEducation.find (query) 
+    .select('_id user degree_title study_field edu_country edu_city completion_year institude')
     .exec()
     .then(doc => {
-        const response ={
-            data:doc.map(doc=>{
-                return{
-                    _id:doc._id,
-                    user:doc.user,
-                    degree_title:doc.degree_title,
-                    study_field:doc.study_field,
-                    edu_country:doc.edu_country,
-                    edu_city:doc.edu_city,
-                    completion_year: doc.completion_year,
-                }
-            })
-        }
         if(doc){
-            res.status(200).json(response)
+            res.status(200).json(doc)
         }else{
             res.status(404).json({
                 message: "no data found against this id",

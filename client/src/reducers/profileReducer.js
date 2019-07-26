@@ -16,17 +16,18 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 loading: true
-            };
+            }
         case ADD_SUMMARY:
             return{
                 ...state,
-                summary:[action.payload, ...state.summary]
+                // summary:[action.payload, ...state.summary]
+                summary:action.payload
             }
         case GET_SUMMARY:
             return{
                 ...state,
                 summary:action.payload,
-                loading:false
+                // loading:false
             }
 
         case ADD_EXPERIENCE:
@@ -38,7 +39,7 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 experience:action.payload,
-                loading:false
+                // loading:false
             }
         case ADD_EDUCATION:
             return{
@@ -49,7 +50,7 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 education:action.payload,
-                loading:false
+                // loading:false
             }
        
         default:

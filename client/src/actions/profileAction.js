@@ -29,7 +29,7 @@ export const addExperience = (experience_data)=> dispatch =>{
 
 export const getExperience = (user_id)=> dispatch =>{
     dispatch(setPostLoading());
-    axios.get('/profile/get_profile/'+user_id).then(res => dispatch({
+    axios.get('/profile/get_experience/'+user_id).then(res => dispatch({
         type:GET_EXPERIENCE,
         payload:res.data
     }))

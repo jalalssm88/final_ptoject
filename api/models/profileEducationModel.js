@@ -19,6 +19,9 @@ const ProfileEducationSchema = new Schema({
     },
     completion_year:{
         type:String
+    },
+    institude:{
+        type:String
     }
 });
 
